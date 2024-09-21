@@ -9,5 +9,6 @@ export class Names {
     const isLongEnough = name.length >= this.minLength;
     if (!isLongEnough) return;
     this.names.push(name);
+    this.name = '';
   }
 }
