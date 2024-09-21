@@ -10,10 +10,18 @@ export class Names {
     this._eventAggregator = EventAggregator;
   }
 
+  attached() {
+    const names = localStorage.getItem('names');
+    if (names) {
+      this.names = JSON.parse(names);
+    }
+  }
+
   addName(name) {
     const isLongEnough = name.length >= this.minLength;
     if (!isLongEnough) return;
     this.names.push(name);
+    localStorage.setItem('names', JSON.stringify(this.names));
     this.name = '';
   }
 
