@@ -12,16 +12,17 @@ export class GameState {
   }
 
   attached() {
-    this._startSubscription = this._eventAggregator.subscribe('start', names => {
-      this.state = 1;
-    })
+    this._startSubscription = this._eventAggregator.subscribe('start', names => this._start(names));
+  }
+
+  _start(names) {
+    this._names = names;
+    this.name = this._names[Math.floor(Math.random() * this._names.length)];
+    this.state = 1;
   }
 
   detached() {
     this._startSubscription.dispose();
   }
 
-  enterNames(gameState) {
-    return 0 === gameState;
-  }
 }

@@ -1,4 +1,7 @@
 <template>
   <require from="./names"></require>
-  <names if.bind="enterNames(state)"></names>
+  <require from="./game"></require>
+  <names if.bind="state == 0"></names>
+  <game if.bind="state == 1"
+        name.bind="name"></game>
 </template>
