@@ -1,7 +1,11 @@
 <template>
   <require from="./names"></require>
   <require from="./game"></require>
+  <require from="./result"></require>
+
   <names if.bind="state == 0"></names>
   <game if.bind="state == 1"
         name.bind="name"></game>
+  <result if.bind="state == 2"
+          name.bind="name"></result>
 </template>

@@ -1,9 +1,11 @@
 <template>
-  <h2>${name}</h2>
-  <h3>${randomLetter}</h3>
-  <form submit.delegate="gameResult()">
-    <button type="button"
-             click.delegate="bounce()">Bounce</button>
-    <button type="submit" innerhtml.bind="'>>'" click.delegate="gameResult()"></button>
-  </form>
+    <require from="./game.css"></require>
+    <h2>${name}</h2>
+    <h3>${randomLetter}</h3>
+    <form submit.delegate="gameResult()">
+        <button type="button"
+            click.delegate="bounce()">Bounce</button>
+        <button type="submit"
+            click.delegate="next()">>></button>
+    </form>
 </template>

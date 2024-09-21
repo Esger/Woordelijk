@@ -1,17 +1,22 @@
-import { bindable } from 'aurelia-framework';
-
+import { bindable, inject } from 'aurelia-framework';
+import { EventAggregator } from 'aurelia-event-aggregator';
+@inject(EventAggregator)
 export class Game {
-  @bindable name;
+    @bindable name;
 
-  attached() {
-    this.randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-  }
+    constructor(EventAggregator) {
+        this._eventAggregator = EventAggregator;
+    }
 
-  gameResult() {
-    //
-  }
+    attached() {
+        this.randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    }
 
-  bounce() {
-    //
-  }
+    next() {
+        this._eventAggregator.publish('next');
+    }
+
+    bounce() {
+        this._eventAggregator.publish('bounce');
+    }
 }
