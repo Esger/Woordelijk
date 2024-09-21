@@ -5,6 +5,8 @@
     <label for="name">Name:</label>
     <input type="text"
         value.bind="name"
+        minlength.bind="minLength"
+        placeholder="Jan"
         id="name"
         required>
     <button type="submit"
@@ -15,4 +17,9 @@
       ${name}
     </li>
   </ul>
+  <form if.bind="names.length > 1"
+        submit.delegate="start">
+    <button click.delegate="start">Begin</button>
+  </form>
+
 </template>

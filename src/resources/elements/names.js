@@ -1,12 +1,13 @@
 import { bindable } from 'aurelia-framework';
 
 export class Names {
-    @bindable value;
-    title = 'Wie doet er mee?';
-    names = [];
+  @bindable names = [];
+  title = 'Wie doet er mee?';
+  minLength = 3;
 
-    addName(name) {
-        if (name === '') return;
-        this.names.push(name);
-    }
+  addName(name) {
+    const isLongEnough = name.length >= this.minLength;
+    if (!isLongEnough) return;
+    this.names.push(name);
+  }
 }
