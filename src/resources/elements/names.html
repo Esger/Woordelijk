@@ -1,4 +1,6 @@
 <template>
+    <require from="./names.css"></require>
+
     <h2>${title}</h2>
 
     <form submit.delegate="addName(name)">
@@ -13,7 +15,7 @@
     </form>
     <ul>
         <li repeat.for="name of names">
-            ${name}
+            <span>${name}</span><button click.delegate="names.splice($index, 1)">&times;</button>
         </li>
     </ul>
     <form if.bind="names.length > 1"
