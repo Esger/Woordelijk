@@ -32,11 +32,17 @@ export class GameState {
 
     _bounce() {
         this._direction *= -1;
+        this._showReward();
         this._next();
     }
 
     _finish(result) {
+        !result && this._showReward();
         this.state = 1;
+    }
+
+    _showReward() {
+        this._eventAggregator.publish('reward', this.name);
     }
 
     _nextName() {
