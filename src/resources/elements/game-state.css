@@ -1,0 +1,19 @@
+.animate-fadeIn {
+    animation-name: fadeIn 1s ease-out;
+}
+
+.animate-fadeOut {
+    animation-name: fadeOut 1s ease-in;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}

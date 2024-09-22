@@ -10,6 +10,7 @@ export class GameState {
         this._gameState = this.gameStates[this._state];
         this._direction = 1;
         this.state = 0;
+        this.showReward = false;
     }
 
     attached() {
@@ -42,7 +43,9 @@ export class GameState {
     }
 
     _showReward() {
-        this._eventAggregator.publish('reward', this.name);
+        // this._eventAggregator.publish('reward', this.name);
+        this.showReward = true;
+        setTimeout(_ => this.showReward = false, 2000);
     }
 
     _nextName() {

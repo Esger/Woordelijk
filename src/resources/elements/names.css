@@ -5,13 +5,38 @@ names {
 
     ul {
         padding-left: 0;
+        width       : 100%;
     }
 
     li {
-        margin-bottom: 5px;
+        margin-bottom  : 5px;
+        width          : 100%;
+        display        : flex;
+        justify-content: space-between;
 
         button {
             margin-left: 10px;
+        }
+    }
+
+    input {
+        &::placeholder {
+            font-weight: normal;
+            color      : var(--mainColor);
+        }
+
+        &:focus-within {
+            outline: 1px solid greenyellow;
+        }
+    }
+
+    h2 {
+        font-size  : 2.4rem;
+        font-family: 'Bungee Inline';
+        font-weight: 400;
+
+        @media screen and (max-width: 600px) {
+            font-size: 2rem;
         }
     }
 }

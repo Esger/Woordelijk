@@ -10,7 +10,7 @@ export class Game {
     }
 
     attached() {
-        this.spin = false;
+        // this.spin = false;
         this.letters = new Array(this._maxLetters);
         for (let i = 0; i < this.letters.length; i++) {
             this.letters[i] = this._randomLetter();
@@ -18,6 +18,10 @@ export class Game {
         setTimeout(() => {
             this.spin = true;
         });
+    }
+
+    detached() {
+        this.spin = false;
     }
 
     _randomLetter() {

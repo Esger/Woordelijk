@@ -1,0 +1,14 @@
+smoke {
+    display          : block;
+    position         : absolute;
+    left             : -50vmax;
+    top              : 50vmax;
+    width            : 100vmax;
+    height           : 100vmax;
+    background-image : url('./smoke-b-w.gif');
+    background-repeat: no-repeat;
+    background-size  : cover;
+    transform        : rotate(90deg) translate(-50vmax, -50vmax);
+    opacity          : .4;
+    pointer-events   : none;
+}

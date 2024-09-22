@@ -1,7 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&family=Bungee+Inline&family=Bungee+Outline&family=Open+Sans:wght@400;600&display=swap');
+
+*,
+*:before,
+*:after {
+    --mainColor      : green;
+    --backgroundColor: black;
+}
+
 body {
-    height         : 100dvh;
-    display        : flex;
-    flex-direction : column;
-    align-items    : center;
-    justify-content: center;
+    height          : 100dvh;
+    margin          : 0;
+    display         : flex;
+    flex-direction  : column;
+    align-items     : center;
+    justify-content : center;
+    overflow        : hidden;
+    background-color: var(--backgroundColor);
+    color           : var(--mainColor);
+    font-size       : 32px;
+    font-family     : 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h1,
+h2 {
+    font-family: 'Bungee outline', sans-serif;
+}
+
+h1 {
+    font-size  : 4rem;
+    font-weight: bold;
+
+    @media screen and (max-width: 600px) {
+        font-size: 3rem;
+    }
+}
+
+button,
+input {
+    background-color: var(--backgroundColor);
+    border          : 2px solid var(--mainColor);
+    color           : var(--mainColor);
+    padding         : 10px 20px;
+    cursor          : pointer;
+    font-family     : inherit;
+    font-size       : 2rem;
+    font-weight     : bold;
+
+    @media screen and (max-width: 600px) {
+        font-size: 1rem;
+    }
 }

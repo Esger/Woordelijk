@@ -1,9 +1,18 @@
-/* game {
-} */
+game {
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+
+    h2 {
+        margin-bottom: 0;
+        font-size    : 4rem;
+        font-weight  : normal;
+    }
+}
 
 spinner {
-    --spinnerWidth : 3lh;
-    --spinnerHeight: 2lh;
+    --spinnerWidth : 8rem;
+    --spinnerHeight: 8rem;
 
     position    : relative;
     display     : block;
@@ -11,13 +20,14 @@ spinner {
     height      : var(--spinnerHeight);
     margin-block: 2lh;
     overflow    : hidden;
+    box-shadow  : 0 0 10px 5px green;
 
 
     ul {
         transform: translate(0);
 
         .spin & {
-            transform: translate(0, calc(2lh - 100%));
+            transform: translate(0, calc(9rem - 100%));
         }
 
         position    : absolute;
@@ -32,9 +42,11 @@ spinner {
         li {
             display      : block;
             text-align   : center;
-            width        : var(--spinnerWidth);
-            height       : 1lh;
-            padding-block: .5lh;
+            width        : 8rem;
+            height       : 6rem;
+            font-size    : 4rem;
+            line-height  : 4rem;
+            padding-block: 1rem;
         }
     }
 }
