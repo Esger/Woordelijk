@@ -6,10 +6,22 @@ export class Game {
 
     constructor(EventAggregator) {
         this._eventAggregator = EventAggregator;
+        this._maxLetters = 50;
     }
 
     attached() {
-        this.randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        this.spin = false;
+        this.letters = new Array(this._maxLetters);
+        for (let i = 0; i < this.letters.length; i++) {
+            this.letters[i] = this._randomLetter();
+        }
+        setTimeout(() => {
+            this.spin = true;
+        });
+    }
+
+    _randomLetter() {
+        return String.fromCharCode(65 + Math.floor(Math.random() * 26));
     }
 
     next() {

@@ -1,0 +1,40 @@
+/* game {
+} */
+
+spinner {
+    --spinnerWidth : 3lh;
+    --spinnerHeight: 2lh;
+
+    position    : relative;
+    display     : block;
+    width       : var(--spinnerWidth);
+    height      : var(--spinnerHeight);
+    margin-block: 2lh;
+    overflow    : hidden;
+
+
+    ul {
+        transform: translate(0);
+
+        .spin & {
+            transform: translate(0, calc(2lh - 100%));
+        }
+
+        position    : absolute;
+        left        : 0;
+        top         : 0;
+        list-style  : none;
+        padding-left: 0;
+        margin      : 0;
+        display     : block;
+        transition  : transform 5s ease-out;
+
+        li {
+            display      : block;
+            text-align   : center;
+            width        : var(--spinnerWidth);
+            height       : 1lh;
+            padding-block: .5lh;
+        }
+    }
+}

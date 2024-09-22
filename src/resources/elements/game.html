@@ -1,7 +1,11 @@
 <template>
     <require from="./game.css"></require>
     <h2>${name}</h2>
-    <h3>${randomLetter}</h3>
+    <spinner class="${spin ? 'spin' : ''}">
+        <ul>
+            <li repeat.for="letter of letters">${letter}</li>
+        </ul>
+    </spinner>
     <form submit.delegate="gameResult()">
         <button type="button"
             click.delegate="bounce()">Bounce</button>
