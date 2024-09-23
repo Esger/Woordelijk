@@ -39,6 +39,11 @@ h1 {
     }
 }
 
+h2 {
+    font-size  : 4rem;
+    font-weight: normal;
+}
+
 form {
     text-align: center;
 }
@@ -47,24 +52,18 @@ button,
 input {
     background-color: var(--mainColor);
     border          : 2px double var(--mainColor);
-    border-radius   : 3px;
+    border-radius   : 4px;
     color           : var(--backgroundColor);
     padding         : 10px 20px;
-    cursor          : pointer;
     font-family     : inherit;
     font-size       : 2rem;
     font-weight     : bold;
+
+    &:not(:disabled) {
+        cursor: pointer;
+    }
 
     @media screen and (max-width: 600px) {
         font-size: 1rem;
     }
-}
-
-input:-internal-autofill-selected,
-input:-webkit-autofill {
-    background-color: var(--mainColor);
-    color           : var(--backgroundColor);
-    font-family     : inherit;
-    font-size       : 2rem;
-    font-weight     : bold;
 }

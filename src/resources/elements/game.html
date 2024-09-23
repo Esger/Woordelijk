@@ -1,15 +1,18 @@
 <template>
     <require from="./game.css"></require>
     <h2>${name}</h2>
-    <spinner class="${spin ? 'spin' : ''}">
+    <spinner class="${spin ? 'spin' : ''}"
+             click.delegate="spinIt()">
         <ul>
             <li repeat.for="letter of letters">${letter}</li>
         </ul>
     </spinner>
     <form submit.delegate="gameResult()">
         <button type="button"
+            disabled.bind="buttonsDisabled"
             click.delegate="bounce()">Bounce</button>
         <button type="submit"
+            disabled.bind="buttonsDisabled"
             click.delegate="next()">>></button>
     </form>
 </template>

@@ -6,26 +6,32 @@ export class Game {
 
     constructor(EventAggregator) {
         this._eventAggregator = EventAggregator;
-        this._maxLetters = 50;
+        this._maxLetters = 30;
     }
 
     attached() {
-        // this.spin = false;
-        this.letters = new Array(this._maxLetters);
-        for (let i = 0; i < this.letters.length; i++) {
-            this.letters[i] = this._randomLetter();
-        }
-        setTimeout(() => {
-            this.spin = true;
-        });
+        this._randomLetters();
+        this.buttonsDisabled = true;
     }
 
     detached() {
         this.spin = false;
     }
 
-    _randomLetter() {
-        return String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    _randomLetters() {
+        this.letters = [];
+        this.letters.push('?');
+        for (let i = 0; i < this._maxLetters; i++) {
+            const randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+            this.letters.push(randomLetter);
+        }
+    }
+
+    spinIt() {
+        this.spin = true;
+        $('spinner ul').one('transitionend', _ => {
+            this.buttonsDisabled = false;
+        });
     }
 
     next() {

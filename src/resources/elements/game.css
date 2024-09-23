@@ -5,8 +5,6 @@ game {
 
     h2 {
         margin-bottom: 0;
-        font-size    : 4rem;
-        font-weight  : normal;
     }
 }
 
@@ -14,22 +12,17 @@ spinner {
     --spinnerWidth : 8rem;
     --spinnerHeight: 8rem;
 
-    position    : relative;
-    display     : block;
-    width       : var(--spinnerWidth);
-    height      : var(--spinnerHeight);
-    margin-block: 2lh;
-    overflow    : hidden;
-    box-shadow  : 0 0 10px 5px green;
+    position     : relative;
+    display      : block;
+    width        : var(--spinnerWidth);
+    height       : var(--spinnerHeight);
+    margin-block : 2lh;
+    overflow     : hidden;
+    box-shadow   : 0 0 10px 5px green;
+    border-radius: 7px;
 
 
     ul {
-        transform: translate(0);
-
-        .spin & {
-            transform: translate(0, calc(9rem - 100%));
-        }
-
         position    : absolute;
         left        : 0;
         top         : 0;
@@ -37,7 +30,14 @@ spinner {
         padding-left: 0;
         margin      : 0;
         display     : block;
-        transition  : transform 5s ease-out;
+        cursor      : pointer;
+        transition  : transform 2.5s ease-out;
+        transform   : translate(0);
+
+        .spin & {
+            transform: translate(0, calc(9rem - 100%));
+        }
+
 
         li {
             display      : block;
@@ -47,6 +47,10 @@ spinner {
             font-size    : 4rem;
             line-height  : 4rem;
             padding-block: 1rem;
+
+            &:first-child {
+                margin-top: 1rem;
+            }
         }
     }
 }
