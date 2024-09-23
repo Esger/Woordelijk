@@ -18,7 +18,7 @@ export class Names {
     }
 
     addName(name) {
-        const isLongEnough = name.length >= this.minLength;
+        const isLongEnough = name?.length >= this.minLength;
         if (!isLongEnough) return;
         this.names.push(name);
         localStorage.setItem('names', JSON.stringify(this.names));

@@ -24,6 +24,7 @@ body {
 h1,
 h2 {
     font-family: 'Bungee outline', sans-serif;
+    text-align : center;
 }
 
 h1 {
@@ -33,6 +34,10 @@ h1 {
     @media screen and (max-width: 600px) {
         font-size: 3rem;
     }
+}
+
+form {
+    text-align: center;
 }
 
 button,
@@ -50,3 +55,12 @@ input {
         font-size: 1rem;
     }
 }
+
+/* 
+input::-webkit-autofill {
+    background-color: var(--backgroundColor);
+    color           : var(--mainColor);
+    font-family     : inherit;
+    font-size       : 2rem;
+    font-weight     : bold;
+} */

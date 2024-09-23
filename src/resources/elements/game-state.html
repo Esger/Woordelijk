@@ -1,4 +1,5 @@
 <template>
+    <require from="./game-state.css"></require>
     <require from="./names"></require>
     <require from="./game"></require>
     <require from="./result"></require>
@@ -9,6 +10,6 @@
           name.bind="name"></game>
     <result if.bind="state == 2"
             name.bind="name"></result>
-    <smoke show.bind="showReward"
+    <smoke if.bind="showReward"
            class="au-animate animate-fadeIn animate-fadeOut"></smoke>
 </template>
