@@ -19,18 +19,26 @@ spinner {
 
     position     : relative;
     display      : block;
-    width        : var(--spinnerWidth);
-    height       : var(--spinnerHeight);
     margin-block : 2lh;
-    overflow     : hidden;
     box-shadow   : 0 0 10px 5px green;
     border-radius: 7px;
 
+    &::before {
+        content   : '';
+        position  : absolute;
+        inset     : 0;
+        box-shadow: 0 0 30px 10px rgb(0, 128, 0);
+        animation : glower 3s ease-in-out infinite;
+        opacity   : 0;
+    }
+
+    .spinnerMask {
+        width   : var(--spinnerWidth);
+        height  : var(--spinnerHeight);
+        overflow: hidden;
+    }
 
     ul {
-        position    : absolute;
-        left        : 0;
-        top         : 0;
         list-style  : none;
         padding-left: 0;
         margin      : 0;
@@ -40,7 +48,7 @@ spinner {
         transform   : translate(0);
 
         .spin & {
-            transform: translate(0, calc(9rem - 100%));
+            transform: translate(0, calc(6rem - 100%));
         }
 
 
@@ -58,5 +66,19 @@ spinner {
                 margin-top: 1rem;
             }
         }
+    }
+}
+
+@keyframes glower {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
     }
 }

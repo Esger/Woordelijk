@@ -3,9 +3,11 @@
     <h2>${name}</h2>
     <spinner class="${spin ? 'spin' : ''}"
              click.delegate="spinIt()">
-        <ul>
-            <li repeat.for="letter of letters">${letter}</li>
-        </ul>
+        <div class="spinnerMask">
+            <ul>
+                <li repeat.for="letter of letters">${letter}</li>
+            </ul>
+        </div>
     </spinner>
     <form submit.delegate="gameResult()">
         <fieldset if.bind="spinnerReady"
