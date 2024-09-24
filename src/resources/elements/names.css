@@ -9,7 +9,7 @@ names {
     }
 
     li {
-        margin-bottom  : 5px;
+        margin-bottom  : 1rem;
         width          : 100%;
         display        : flex;
         justify-content: space-between;

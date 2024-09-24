@@ -31,8 +31,9 @@ h2 {
 }
 
 h1 {
-    font-size  : 4rem;
-    font-weight: bold;
+    font-size    : 4rem;
+    font-weight  : bold;
+    margin-bottom: 4rem;
 
     @media screen and (max-width: 600px) {
         font-size: 3rem;
@@ -40,24 +41,37 @@ h1 {
 }
 
 h2 {
-    font-size  : 4rem;
-    font-weight: normal;
+    font-size    : 4rem;
+    font-weight  : normal;
+    margin-bottom: 1rem;
 }
 
 form {
-    text-align: center;
+    display        : flex;
+    justify-content: center;
+    gap            : 20px;
+    text-align     : center;
+    margin-bottom  : 1rem;
+}
+
+fieldset {
+    border : none;
+    display: flex;
+    gap    : 20px;
 }
 
 button,
 input {
+    display         : block;
     background-color: var(--mainColor);
-    border          : 2px double var(--mainColor);
+    border          : none;
     border-radius   : 4px;
     color           : var(--backgroundColor);
     padding         : 10px 20px;
     font-family     : inherit;
     font-size       : 2rem;
     font-weight     : bold;
+    line-height     : 2rem;
 
     &:not(:disabled) {
         cursor: pointer;
@@ -65,5 +79,45 @@ input {
 
     @media screen and (max-width: 600px) {
         font-size: 1rem;
+    }
+}
+
+.animate-fadeIn {
+    &.au-enter {
+        opacity: 0;
+    }
+
+    &.au-enter-active {
+        animation: fadeIn 1s ease-out forwards;
+    }
+}
+
+.animate-fadeOut {
+    &.au-leave-active {
+        animation: fadeOut 1s ease-in forwards;
+    }
+
+    &.au-left {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
     }
 }

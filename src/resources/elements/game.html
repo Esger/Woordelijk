@@ -8,11 +8,12 @@
         </ul>
     </spinner>
     <form submit.delegate="gameResult()">
-        <button type="button"
-            disabled.bind="buttonsDisabled"
-            click.delegate="bounce()">Bounce</button>
-        <button type="submit"
-            disabled.bind="buttonsDisabled"
-            click.delegate="next()">>></button>
+        <fieldset if.bind="spinnerReady"
+                  class="au-animate animate-fadeIn">
+            <button type="button"
+                  click.delegate="bounce()">Bounce</button>
+            <button type="submit"
+                  click.delegate="next()">>></button>
+        </fieldset>
     </form>
 </template>

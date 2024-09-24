@@ -6,6 +6,11 @@ game {
     h2 {
         margin-bottom: 0;
     }
+
+    form {
+        display: block;
+        height : calc(2rem + 20px);
+    }
 }
 
 spinner {
@@ -47,6 +52,7 @@ spinner {
             font-size    : 4rem;
             line-height  : 4rem;
             padding-block: 1rem;
+            margin-block : 2rem;
 
             &:first-child {
                 margin-top: 1rem;

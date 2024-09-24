@@ -1,9 +1,9 @@
 <template>
     <h2>${name}</h2>
     <form submit.delegate="gameResult()">
-        <button type="submit"
-            click.delegate="gameResult(true)">√</button>
         <button type="cancel"
             click.delegate="gameResult(false)">&times;</button>
+        <button type="submit"
+            click.delegate="gameResult(true)">√</button>
     </form>
 </template>

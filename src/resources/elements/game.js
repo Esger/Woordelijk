@@ -11,7 +11,7 @@ export class Game {
 
     attached() {
         this._randomLetters();
-        this.buttonsDisabled = true;
+        this.spinnerReady = false;
     }
 
     detached() {
@@ -29,8 +29,9 @@ export class Game {
 
     spinIt() {
         this.spin = true;
+        this.spinnerReady = false;
         $('spinner ul').one('transitionend', _ => {
-            this.buttonsDisabled = false;
+            this.spinnerReady = true;
         });
     }
 
