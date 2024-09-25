@@ -37,9 +37,11 @@ export class Game {
 
     next() {
         this._eventAggregator.publish('next');
+        this.spinnerReady = false;
     }
 
     bounce() {
         this._eventAggregator.publish('bounce');
+        this.spinnerReady = false;
     }
 }

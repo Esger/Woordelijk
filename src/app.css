@@ -85,19 +85,41 @@ input {
     }
 }
 
+.fadeInOut {
+    transition: opacity .5s ease-in-out;
+
+    &.hide {
+        opacity       : 0;
+        pointer-events: none;
+    }
+
+    &.show {
+        opacity       : 1;
+        pointer-events: all;
+    }
+}
+
 .animate-fadeIn {
     &.au-enter {
         opacity: 0;
     }
 
     &.au-enter-active {
-        animation: fadeIn 1s ease-out forwards;
+        animation: fadeIn 1s ease-out;
+    }
+
+    &.au-entered {
+        opacity: 1;
     }
 }
 
 .animate-fadeOut {
+    &.au-leave {
+        opacity: 1;
+    }
+
     &.au-leave-active {
-        animation: fadeOut 1s ease-in forwards;
+        animation: fadeOut 1s ease-in;
     }
 
     &.au-left {

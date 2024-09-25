@@ -45,7 +45,7 @@ export class GameState {
     _showReward() {
         // this._eventAggregator.publish('reward', this.name);
         this.showReward = true;
-        setTimeout(_ => this.showReward = false, 2000);
+        setTimeout(_ => this.showReward = false, 2400);
     }
 
     _nextName() {

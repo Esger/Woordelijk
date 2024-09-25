@@ -10,8 +10,7 @@
         </div>
     </spinner>
     <form submit.delegate="gameResult()">
-        <fieldset if.bind="spinnerReady"
-                  class="au-animate animate-fadeIn">
+        <fieldset class="fadeInOut ${spinnerReady ? 'show': 'hide'}">
             <button type="button"
                   click.delegate="bounce()">Bounce</button>
             <button type="submit"

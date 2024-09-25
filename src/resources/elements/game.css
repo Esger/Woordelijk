@@ -7,9 +7,8 @@ game {
         margin-bottom: 0;
     }
 
-    form {
-        display: block;
-        height : calc(2rem + 20px);
+    fieldset {
+        display: flex;
     }
 }
 
