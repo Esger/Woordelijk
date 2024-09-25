@@ -18,6 +18,9 @@ export class GameState {
         this._lostSubscription = this._eventAggregator.subscribe('gameResult', result => this._finish(result));
         this._bounceSubscription = this._eventAggregator.subscribe('bounce', _ => this._bounce());
         this._nextSubscription = this._eventAggregator.subscribe('next', _ => this._next());
+        this._playKeyPressedSubscription = this._eventAggregator.subscribe('play', _ => {
+            this.state == 1 && this._next();
+        });
     }
 
     _start(names) {
@@ -62,6 +65,9 @@ export class GameState {
     detached() {
         this._startSubscription.dispose();
         this._lostSubscription.dispose();
+        this._bounceSubscription.dispose();
+        this._nextSubscription.dispose();
+        this._playKeyPressedSubscription.dispose();
     }
 
 }

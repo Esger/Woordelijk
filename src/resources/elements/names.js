@@ -4,10 +4,13 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 export class Names {
     @bindable names = [];
     title = 'Wie doet er mee?';
-    minLength = 3;
+    minLength = 1;
 
     constructor(EventAggregator) {
         this._eventAggregator = EventAggregator;
+        this._playKeyPressedSubscription = this._eventAggregator.subscribe('play', _ => {
+            this.start()
+        });
     }
 
     attached() {

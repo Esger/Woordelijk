@@ -1,4 +1,9 @@
 result {
+    form {
+        gap            : 4rem;
+        justify-content: center;
+    }
+
     button {
         width          : 5rem;
         aspect-ratio   : 1;
