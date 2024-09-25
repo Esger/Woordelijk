@@ -1,9 +1,23 @@
 <template>
+    <require from="./result.css"></require>
+
     <h2>${name}</h2>
     <form submit.delegate="gameResult()">
         <button type="cancel"
-            click.delegate="gameResult(false)">&times;</button>
+            click.delegate="gameResult(false)"><svg xmlns="http://www.w3.org/2000/svg"
+                 width="1em"
+                 height="1em"
+                 viewBox="0 0 24 24">
+                <path fill="currentColor"
+                      d="M5.293 5.293a1 1 0 0 1 1.414 0L12 10.586l5.293-5.293a1 1 0 1 1 1.414 1.414L13.414 12l5.293 5.293a1 1 0 0 1-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L10.586 12L5.293 6.707a1 1 0 0 1 0-1.414" />
+            </svg></button>
         <button type="submit"
-            click.delegate="gameResult(true)">√</button>
+            click.delegate="gameResult(true)"><svg xmlns="http://www.w3.org/2000/svg"
+                 width="1em"
+                 height="1em"
+                 viewBox="0 0 24 24">
+                <path fill="currentColor"
+                      d="M20.664 5.253a1 1 0 0 1 .083 1.411l-10.666 12a1 1 0 0 1-1.495 0l-5.333-6a1 1 0 0 1 1.494-1.328l4.586 5.159l9.92-11.16a1 1 0 0 1 1.411-.082" />
+            </svg></button>
     </form>
 </template>

@@ -1,5 +1,13 @@
 result {
-    form {
+    button {
+        width          : 5rem;
+        aspect-ratio   : 1;
+        display        : flex;
+        align-items    : center;
         justify-content: center;
+
+        svg {
+            scale: 1.5;
+        }
     }
 }

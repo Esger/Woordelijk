@@ -18,7 +18,7 @@ spinner {
 
     position     : relative;
     display      : block;
-    margin-block : 2lh;
+    margin-block : 2rem 3rem;
     box-shadow   : 0 0 10px 5px green;
     border-radius: 7px;
 
@@ -52,6 +52,7 @@ spinner {
 
 
         li {
+            font-family  : 'Bungee Inline', sans-serif;
             display      : block;
             text-align   : center;
             width        : 8rem;
@@ -62,7 +63,9 @@ spinner {
             margin-block : 2rem;
 
             &:first-child {
-                margin-top: 1rem;
+                margin-top     : 1rem;
+                display        : flex;
+                justify-content: center;
             }
         }
     }

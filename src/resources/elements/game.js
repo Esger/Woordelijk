@@ -20,7 +20,6 @@ export class Game {
 
     _randomLetters() {
         this.letters = [];
-        this.letters.push('?');
         for (let i = 0; i < this._maxLetters; i++) {
             const randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
             this.letters.push(randomLetter);
