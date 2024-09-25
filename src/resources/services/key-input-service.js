@@ -24,9 +24,9 @@ export class KeyInputService {
             case 'space':
                 this._eventAggregator.publish('play');
                 break;
-            // case 'escape':
-            //     this._eventAggregator.publish('pause', true);
-            //     break;
+            case 'keyb':
+                this._eventAggregator.publish('bounce');
+                break;
             // case 'comma':
             //     this._eventAggregator.publish('key', ',');
             //     break;

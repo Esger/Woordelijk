@@ -21,6 +21,9 @@ export class GameState {
         this._playKeyPressedSubscription = this._eventAggregator.subscribe('play', _ => {
             this.state == 1 && this._next();
         });
+        this._playKeyPressedSubscription = this._eventAggregator.subscribe('bounce', _ => {
+            this.state == 1 && this._bounce();
+        });
     }
 
     _start(names) {
