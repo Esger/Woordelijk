@@ -10,6 +10,5 @@
           name.bind="name"></game>
     <result if.bind="state == 2"
             name.bind="name"></result>
-    <smoke if.bind="showReward"
-           class="au-animate animate-fadeIn animate-fadeOut"></smoke>
+    <smoke class="fadeInOut ${showReward ? 'show' : 'hide'}"></smoke>
 </template>
