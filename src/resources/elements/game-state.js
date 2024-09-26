@@ -11,14 +11,14 @@ export class GameState {
         this._direction = 1;
         this.state = 0;
         this.showReward = false;
+    }
+
+    attached() {
         this._startSubscription = this._eventAggregator.subscribe('start', names => this._start(names));
         this._lostSubscription = this._eventAggregator.subscribe('gameResult', result => this._finish(result));
         this._bounceSubscription = this._eventAggregator.subscribe('bounce', _ => this._bounce());
         this._nextSubscription = this._eventAggregator.subscribe('next', _ => this._next());
         this._spinnerReadySubscription = this._eventAggregator.subscribe('spinnerReady', _ => this._nextEnabled = true);
-    }
-
-    attached() {
     }
 
     _start(names) {
@@ -35,6 +35,7 @@ export class GameState {
     }
 
     _bounce() {
+
         this._showReward();
         const timeout = this._rewardDuration / 2;
         setTimeout(_ => {
@@ -71,7 +72,7 @@ export class GameState {
         this._lostSubscription.dispose();
         this._bounceSubscription.dispose();
         this._nextSubscription.dispose();
-        // this._playKeyPressedSubscription.dispose();
+        this._spinnerReadySubscription.dispose();
     }
 
 }
