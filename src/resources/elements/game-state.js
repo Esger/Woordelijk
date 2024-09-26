@@ -35,7 +35,6 @@ export class GameState {
     }
 
     _bounce() {
-
         this._showReward();
         const timeout = this._rewardDuration / 2;
         setTimeout(_ => {

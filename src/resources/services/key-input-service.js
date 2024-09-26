@@ -6,6 +6,7 @@ export class KeyInputService {
 
     constructor(eventAggregator) {
         this._eventAggregator = eventAggregator;
+        this._debounceDelay = 1000;
         this._setupKeydownListener();
     }
 
@@ -27,11 +28,10 @@ export class KeyInputService {
             if (event.ctrlKey || event.altKey || event.metaKey || event.shiftKey) return;
             event.preventDefault();
             this.handleKeyInput(event);
-        }, 300); // 200ms debounce delay
+        }, this._debounceDelay);
 
         document.addEventListener('keydown', this.debouncedHandler);
     }
-
 
     detached() {
         // Don't forget to remove the event listener when the component is detached
