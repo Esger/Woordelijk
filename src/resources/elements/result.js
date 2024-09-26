@@ -9,6 +9,16 @@ export class Result {
         this._eventAggregator = EventAggregator;
     }
 
+    attached() {
+        this._playKeyPressedSubscription = this._eventAggregator.subscribe('playKeyPressed', _ => {
+            this.gameResult(true);
+        });
+    }
+
+    detached() {
+        this._playKeyPressedSubscription.dispose();
+    }
+
     gameResult(result) {
         this._eventAggregator.publish('gameResult', result);
     }

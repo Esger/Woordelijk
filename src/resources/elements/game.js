@@ -13,10 +13,14 @@ export class Game {
         this.spinnerReady = false;
         this.spin = false;
         this._randomLetters();
+        this._playKeyPressedSubscription = this._eventAggregator.subscribe('playKeyPressed', _ => {
+            this.next();
+        })
     }
 
     detached() {
         this.spin = false;
+        this._playKeyPressedSubscription.dispose();
     }
 
     _randomLetters() {
@@ -32,6 +36,7 @@ export class Game {
         this.spinnerReady = false;
         $('spinner ul').one('transitionend', _ => {
             this.spinnerReady = true;
+            this._eventAggregator.publish('spinnerReady');
         });
     }
 
