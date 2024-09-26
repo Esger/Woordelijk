@@ -53,7 +53,7 @@ export class KeyInputService {
                 this._eventAggregator.publish('escapeKeyPressed');
                 break;
             case 'keyb':
-                this._eventAggregator.publish('bounceKeyPressed');
+                this._eventAggregator.publish('escapeKeyPressed');
                 break;
             // default:
             //     if (key.startsWith('key')) {
