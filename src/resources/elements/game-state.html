@@ -5,10 +5,13 @@
     <require from="./result"></require>
     <require from="./smoke"></require>
 
-    <names if.bind="state == 0"></names>
+    <names if.bind="state == 0"
+           class="au-animate animate-fadeIn"></names>
     <game if.bind="state == 1"
+          class="au-animate animate-fadeIn"
           name.bind="name"></game>
     <result if.bind="state == 2"
+            class="au-animate animate-fadeIn"
             name.bind="name"></result>
     <smoke class="fadeInOut ${showReward ? 'show' : 'hide'}"></smoke>
 </template>
