@@ -9,6 +9,7 @@ export class GameState {
         this._eventAggregator = EventAggregator;
         this._gameState = this.gameStates[this._state];
         this._direction = 1;
+        this._rewardDuration = 2400;
         this.state = 0;
         this.showReward = false;
     }
@@ -18,12 +19,12 @@ export class GameState {
         this._lostSubscription = this._eventAggregator.subscribe('gameResult', result => this._finish(result));
         this._bounceSubscription = this._eventAggregator.subscribe('bounce', _ => this._bounce());
         this._nextSubscription = this._eventAggregator.subscribe('next', _ => this._next());
-        this._playKeyPressedSubscription = this._eventAggregator.subscribe('play', _ => {
-            this.state == 1 && this._next();
-        });
-        this._playKeyPressedSubscription = this._eventAggregator.subscribe('bounce', _ => {
-            this.state == 1 && this._bounce();
-        });
+        // this._playKeyPressedSubscription = this._eventAggregator.subscribe('play', _ => {
+        //     this.state == 1 && this._next();
+        // });
+        // this._playKeyPressedSubscription = this._eventAggregator.subscribe('bounce', _ => {
+        //     this.state == 1 && this._bounce();
+        // });
     }
 
     _start(names) {
@@ -38,20 +39,24 @@ export class GameState {
     }
 
     _bounce() {
-        this._direction *= -1;
         this._showReward();
-        this._next();
+        const timeout = this._rewardDuration / 2;
+        setTimeout(_ => {
+            this._direction *= -1;
+            this.name = this._nextName();
+            this.state = 2;
+        }, timeout);
     }
 
     _finish(result) {
+        const timeout = !result * this._rewardDuration / 2;
+        setTimeout(_ => this.state = 1, timeout);
         !result && this._showReward();
-        this.state = 1;
     }
 
     _showReward() {
-        // this._eventAggregator.publish('reward', this.name);
         this.showReward = true;
-        setTimeout(_ => this.showReward = false, 2400);
+        setTimeout(_ => this.showReward = false, this._rewardDuration);
     }
 
     _nextName() {
@@ -70,7 +75,7 @@ export class GameState {
         this._lostSubscription.dispose();
         this._bounceSubscription.dispose();
         this._nextSubscription.dispose();
-        this._playKeyPressedSubscription.dispose();
+        // this._playKeyPressedSubscription.dispose();
     }
 
 }

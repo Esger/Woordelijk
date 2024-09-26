@@ -10,8 +10,9 @@ export class Game {
     }
 
     attached() {
-        this._randomLetters();
         this.spinnerReady = false;
+        this.spin = false;
+        this._randomLetters();
     }
 
     detached() {
