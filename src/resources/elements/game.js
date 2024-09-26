@@ -14,7 +14,11 @@ export class Game {
         this.spin = false;
         this._randomLetters();
         this._playKeyPressedSubscription = this._eventAggregator.subscribe('playKeyPressed', _ => {
-            this.next();
+            if (this.spinnerReady) {
+                this.next();
+            } else {
+                this.spinIt();
+            }
         })
     }
 
