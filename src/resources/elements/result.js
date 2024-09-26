@@ -9,6 +9,21 @@ export class Result {
         this._eventAggregator = EventAggregator;
     }
 
+    attached() {
+        this._playKeyPressedSubscription = this._eventAggregator.subscribe('playKeyPressed', _ => {
+            this.gameResult(true);
+        });
+
+        this._escapeKeyPressedSubscription = this._eventAggregator.subscribe('escapeKeyPressed', _ => {
+            this.gameResult(false);
+        });
+    }
+
+    detached() {
+        this._playKeyPressedSubscription.dispose();
+        this._escapeKeyPressedSubscription.dispose();
+    }
+
     gameResult(result) {
         this._eventAggregator.publish('gameResult', result);
     }

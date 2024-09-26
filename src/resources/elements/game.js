@@ -13,10 +13,22 @@ export class Game {
         this.spinnerReady = false;
         this.spin = false;
         this._randomLetters();
+        this._playKeyPressedSubscription = this._eventAggregator.subscribe('playKeyPressed', _ => {
+            if (this.spinnerReady) {
+                this.next();
+            } else {
+                this.spinIt();
+            }
+        });
+        this._escapeKeyPressedSubscription = this._eventAggregator.subscribe('escapeKeyPressed', _ => {
+            this.bounce();
+        });
     }
 
     detached() {
         this.spin = false;
+        this._playKeyPressedSubscription.dispose();
+        this._escapeKeyPressedSubscription.dispose();
     }
 
     _randomLetters() {
@@ -32,6 +44,7 @@ export class Game {
         this.spinnerReady = false;
         $('spinner ul').one('transitionend', _ => {
             this.spinnerReady = true;
+            this._eventAggregator.publish('spinnerReady');
         });
     }
 

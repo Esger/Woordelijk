@@ -8,9 +8,6 @@ export class Names {
 
     constructor(EventAggregator) {
         this._eventAggregator = EventAggregator;
-        this._playKeyPressedSubscription = this._eventAggregator.subscribe('play', _ => {
-            this.start()
-        });
     }
 
     attached() {
@@ -18,6 +15,10 @@ export class Names {
         if (names) {
             this.names = JSON.parse(names);
         }
+        this._playKeyPressedSubscription = this._eventAggregator.subscribe('playKeyPressed', _ => setTimeout(_ => this.start()));
+    }
+    detached() {
+        this._playKeyPressedSubscription.dispose();
     }
 
     addName(name) {
