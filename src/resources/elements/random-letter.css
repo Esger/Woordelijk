@@ -1,0 +1,72 @@
+spinner {
+    --spinnerWidth : 8rem;
+    --spinnerHeight: 8rem;
+
+    position     : relative;
+    display      : block;
+    margin-block : 2rem 3rem;
+    box-shadow   : 0 0 10px 5px green;
+    border-radius: 7px;
+
+    &::before {
+        content   : '';
+        position  : absolute;
+        inset     : 0;
+        box-shadow: 0 0 30px 10px rgb(0, 128, 0);
+        animation : glower 3s ease-in-out infinite;
+        opacity   : 0;
+    }
+
+    .spinnerMask {
+        width   : var(--spinnerWidth);
+        height  : var(--spinnerHeight);
+        overflow: hidden;
+    }
+
+    ul {
+        list-style  : none;
+        padding-left: 0;
+        margin      : 0;
+        display     : block;
+        cursor      : pointer;
+        transition  : transform 2.5s ease-out;
+        transform   : translate(0);
+
+        .spin & {
+            transform: translate(0, calc(6rem - 100%));
+        }
+
+
+        li {
+            font-family  : 'Bungee Inline', sans-serif;
+            display      : block;
+            text-align   : center;
+            width        : 8rem;
+            height       : 6rem;
+            font-size    : 4rem;
+            line-height  : 4rem;
+            padding-block: 1rem;
+            margin-block : 2rem;
+
+            &:first-child {
+                margin-top     : 1rem;
+                display        : flex;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+@keyframes glower {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
