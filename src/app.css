@@ -13,6 +13,7 @@
 }
 
 body {
+    overflow        : hidden;
     height          : 100dvh;
     margin          : 0;
     display         : flex;
@@ -24,6 +25,28 @@ body {
     color           : var(--mainColor);
     font-size       : 32px;
     font-family     : 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    &:before,
+    &:after {
+        content        : '';
+        position       : absolute;
+        inset          : 0;
+        background-size: cover;
+        z-index        : -1;
+    }
+
+    &:before {
+        background-image: url('assets/smoke-gas.gif');
+        rotate          : -243deg;
+        translate       : -12dvw 55dvw;
+        scale           : 1.7;
+        filter          : blur(4px);
+        opacity         : .6;
+    }
+
+    &:after {
+        background-image: linear-gradient(to top, transparent, var(--backgroundColor) 30%);
+    }
 }
 
 h1,
