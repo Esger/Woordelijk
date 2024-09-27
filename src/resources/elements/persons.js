@@ -2,7 +2,7 @@ import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { SettingsService } from 'services/settings-service';
 @inject(EventAggregator, SettingsService)
-export class Names {
+export class PersonsCustomElement {
     title = 'Wie doet er mee?';
     minLength = 1;
     name;
@@ -45,6 +45,7 @@ export class Names {
 
     start() {
         if (this.persons.length < 1) return;
+
         this._eventAggregator.publish('start', this.persons);
     }
 }
