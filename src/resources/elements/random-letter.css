@@ -47,6 +47,7 @@ spinner {
             line-height  : 4rem;
             padding-block: 1rem;
             margin-block : 2rem;
+            user-select  : none;
 
             &:first-child {
                 margin-top     : 1rem;
