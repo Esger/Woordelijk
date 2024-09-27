@@ -4,10 +4,10 @@
 
     <h2>${name}</h2>
 
-    <random-letter></random-letter>
+    <random-letter show-reward.bind="showReward"></random-letter>
 
     <form submit.delegate="next()">
-        <fieldset class="fadeInOut ${randomLetterReady ? 'show': 'hide'}">
+        <fieldset class="fadeInOut ${letterReady ? 'show': 'hide'}">
             <button type="button"
                   title="bounce"
                   click.delegate="bounce()">

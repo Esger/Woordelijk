@@ -1,8 +1,9 @@
-import { inject } from 'aurelia-framework';
+import { bindable, inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 
 @inject(EventAggregator)
 export class RandomLetter {
+    @bindable showReward = false;
     constructor(EventAggregator) {
         this._eventAggregator = EventAggregator;
         this._maxLetters = 30;
@@ -11,21 +12,14 @@ export class RandomLetter {
     attached() {
         this.spin = false;
         this.letters = this._randomLetters();
-        this._addPlaySubscription();
+        this._playKeyPressedSubscription = this._eventAggregator.subscribe('playKeyPressed', _ => this.spinIt());
     }
 
     detached() {
-        this._playKeyPressedSubscription?.dispose();
+        this._playKeyPressedSubscription.dispose();
         this.spin = false;
     }
 
-    _addPlaySubscription() {
-        if (this._playKeyPressedSubscription) return;
-        this._playKeyPressedSubscription = this._eventAggregator.subscribeOnce('playKeyPressed', _ => {
-            this.spinIt();
-            this._playKeyPressedSubscription = null;
-        });
-    }
     _randomLetters() {
         const letters = [];
         for (let i = 0; i < this._maxLetters; i++) {
@@ -36,7 +30,7 @@ export class RandomLetter {
     }
 
     spinIt() {
-        if (this.spin) return;
+        if (this.spin || this.showReward) return;
         this.spin = true;
         $('spinner ul').one('transitionend', _ => this._eventAggregator.publish('spinnerReady'));
     }

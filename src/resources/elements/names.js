@@ -1,12 +1,12 @@
-import { bindable, inject } from 'aurelia-framework';
+import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 @inject(EventAggregator)
 export class Names {
-    @bindable names = [];
     title = 'Wie doet er mee?';
     minLength = 1;
 
     constructor(EventAggregator) {
+        this.names = [];
         this._eventAggregator = EventAggregator;
     }
 
