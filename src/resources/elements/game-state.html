@@ -9,12 +9,12 @@
            class="au-animate animate-fadeIn"></names>
     <game if.bind="state == 1"
           class="au-animate animate-fadeIn"
-          name.bind="name"
+          name.bind="person.name"
           letter-ready.bind="letterReady"
           show-reward.bind="showReward"></game>
     <result if.bind="state == 2"
             class="au-animate animate-fadeIn"
-            name.bind="name"
+            name.bind="person.name"
             show-reward.bind="showReward"></result>
     <smoke name.bind="winner"
            show-reward.bind="showReward"></smoke>
