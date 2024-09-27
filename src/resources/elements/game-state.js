@@ -1,13 +1,13 @@
-import { bindable, inject } from 'aurelia-framework';
+import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 
 @inject(EventAggregator)
 export class GameState {
-    @bindable value;
+
     constructor(EventAggregator) {
         this._eventAggregator = EventAggregator;
         this._rewardDuration = 2400;
-        this._nextEnabled = false;
+        this.letterReady = false;
         this._direction = 1;
         this.state = 0;
         this.showReward = false;
@@ -18,7 +18,7 @@ export class GameState {
         this._lostSubscription = this._eventAggregator.subscribe('gameResult', result => this._finish(result));
         this._bounceSubscription = this._eventAggregator.subscribe('bounce', _ => this._bounce());
         this._nextSubscription = this._eventAggregator.subscribe('next', _ => this._next());
-        this._spinnerReadySubscription = this._eventAggregator.subscribe('spinnerReady', _ => this._nextEnabled = true);
+        this._spinnerReadySubscription = this._eventAggregator.subscribe('spinnerReady', _ => this.letterReady = true);
     }
 
     _start(names) {
@@ -28,8 +28,7 @@ export class GameState {
     }
 
     _next() {
-        if (!this._nextEnabled) return;
-        this._nextEnabled = false;
+        if (!this.letterReady) return;
         this.name = this._nextName();
         this.state = 2;
     }
@@ -47,6 +46,7 @@ export class GameState {
     _finish(result) {
         const timeout = !result * this._rewardDuration / 2;
         setTimeout(_ => this.state = 1, timeout);
+        this.letterReady = false;
         !result && this._showReward();
     }
 
