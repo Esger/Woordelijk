@@ -10,18 +10,20 @@ export class Result {
     }
 
     attached() {
-        this._playKeyPressedSubscription = this._eventAggregator.subscribe('playKeyPressed', _ => {
+        this._playKeyPressedSubscription = this._eventAggregator.subscribeOnce('playKeyPressed', _ => {
             this.gameResult(true);
+            this._playKeyPressedSubscription = null;
         });
 
-        this._escapeKeyPressedSubscription = this._eventAggregator.subscribe('escapeKeyPressed', _ => {
+        this._escapeKeyPressedSubscription = this._eventAggregator.subscribeOnce('escapeKeyPressed', _ => {
             this.gameResult(false);
+            this._escapeKeyPressedSubscription = null;
         });
     }
 
     detached() {
-        this._playKeyPressedSubscription.dispose();
-        this._escapeKeyPressedSubscription.dispose();
+        this._playKeyPressedSubscription?.dispose();
+        this._escapeKeyPressedSubscription?.dispose();
     }
 
     gameResult(result) {

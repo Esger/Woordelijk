@@ -6,7 +6,7 @@ export class KeyInputService {
 
     constructor(eventAggregator) {
         this._eventAggregator = eventAggregator;
-        this._debounceDelay = 1000;
+        this._debounceDelay = 300;
         this._setupKeydownListener();
     }
 
