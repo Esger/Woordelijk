@@ -6,7 +6,7 @@ spinner {
     display      : block;
     margin-block : 2rem 3rem;
     box-shadow   : 0 0 10px 5px green;
-    border-radius: 7px;
+    border-radius: 10px;
 
     &::before {
         content   : '';
