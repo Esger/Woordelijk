@@ -16,5 +16,5 @@
             class="au-animate animate-fadeIn"
             name.bind="name"
             show-reward.bind="showReward"></result>
-    <smoke class="fadeInOut ${showReward ? 'show' : 'hide'}"></smoke>
+    <smoke show-reward.bind="showReward"></smoke>
 </template>
