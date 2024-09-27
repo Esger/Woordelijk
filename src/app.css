@@ -9,6 +9,7 @@
     *:after {
         --mainColor      : green;
         --backgroundColor: black;
+        --smoke          : #f4f4f4;
     }
 }
 

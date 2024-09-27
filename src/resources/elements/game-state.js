@@ -6,11 +6,12 @@ export class GameState {
 
     constructor(EventAggregator) {
         this._eventAggregator = EventAggregator;
-        this._rewardDuration = 2400;
+        this._rewardDuration = 800;
         this.letterReady = false;
         this._direction = 1;
         this.state = 0;
         this.showReward = false;
+        this.winner = '';
     }
 
     attached() {
@@ -34,31 +35,36 @@ export class GameState {
     }
 
     _bounce() {
+        this.winner = this.name;
         this._showReward();
-        const timeout = this._rewardDuration / 2;
+        const halfway = this._rewardDuration / 2;
         setTimeout(_ => {
             this._direction *= -1;
             this.name = this._nextName();
             this.state = 2;
-        }, timeout);
+        }, halfway);
+    }
+
+    _nextName() {
+        this.lastName = this.name;
+        this._nameIndex += this._direction;
+        this._nameIndex = (this._nameIndex + this._names.length) % this._names.length;
+        return this._names[this._nameIndex];
     }
 
     _finish(result) {
-        const timeout = !result * this._rewardDuration / 2;
-        setTimeout(_ => this.state = 1, timeout);
+        const halfway = !result * this._rewardDuration / 2;
+        setTimeout(_ => this.state = 1, halfway);
         this.letterReady = false;
-        !result && this._showReward();
+        if (!result) {
+            this.winner = this.lastName;
+            this._showReward();
+        }
     }
 
     _showReward() {
         this.showReward = true;
         setTimeout(_ => this.showReward = false, this._rewardDuration);
-    }
-
-    _nextName() {
-        this._nameIndex += this._direction;
-        this._nameIndex = (this._nameIndex + this._names.length) % this._names.length;
-        return this._names[this._nameIndex];
     }
 
     _randomName() {

@@ -1,20 +1,28 @@
 smoke {
-    position: fixed;
-    top     : 0;
-    left    : 0;
-    display : block;
-    height  : 100dvh;
+    position      : fixed;
+    inset         : 0;
+    display       : block;
+    height        : 100dvh;
+    pointer-events: none;
+
+    h1 {
+        position : absolute;
+        top      : 35vh;
+        left     : 50%;
+        transform: translateX(-50%);
+        font-size: 9rem;
+        color    : var(--smoke);
+        z-index  : 1;
+    }
 
     .smoke {
-        position         : absolute;
-        width            : 100vmax;
-        height           : 100vmax;
-        left             : 50vw;
-        top              : 50dvh;
-        transform        : translate(-50%, -50%) rotate(90deg);
-        background-image : url('assets/smoke-b-w.gif');
-        background-repeat: no-repeat;
-        background-size  : cover;
-        pointer-events   : none;
+        position           : absolute;
+        width              : 100vmax;
+        height             : 100vmax;
+        background-image   : url('assets/smoke-puff.gif');
+        background-repeat  : no-repeat;
+        background-size    : cover;
+        background-position: center;
+        pointer-events     : none;
     }
 }
