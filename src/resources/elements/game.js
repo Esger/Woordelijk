@@ -69,16 +69,12 @@ export class Game {
         if (!this.spinnerReady) return;
         this._eventAggregator.publish('next');
         this.spinnerReady = false;
-        setTimeout(_ => {
-            this.spin = false;
-        });
+        this.spin = false;
     }
 
     bounce() {
         this._eventAggregator.publish('bounce');
         this.spinnerReady = false;
-        setTimeout(_ => {
-            this.spin = false;
-        });
+        this.spin = false;
     }
 }
