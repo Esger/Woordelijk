@@ -44,6 +44,7 @@ export class Names {
     }
 
     start() {
+        if (this.persons.length < 1) return;
         this._eventAggregator.publish('start', this.persons);
     }
 }

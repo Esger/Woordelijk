@@ -1,11 +1,12 @@
 import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
-
-@inject(EventAggregator)
+import { SettingsService } from 'services/settings-service';
+@inject(EventAggregator, SettingsService)
 export class GameState {
 
-    constructor(EventAggregator) {
-        this._eventAggregator = EventAggregator;
+    constructor(eventAggregator, settingsService) {
+        this._eventAggregator = eventAggregator;
+        this._settingsService = settingsService;
         this._rewardDuration = 800;
         this.letterReady = false;
         this._direction = 1;
@@ -37,6 +38,7 @@ export class GameState {
     _bounce() {
         this.winner = this.person.name;
         this.person.score++;
+        this._settingsService.saveSettings('persons', this._persons);
         this._showReward();
         const halfway = this._rewardDuration / 2;
         setTimeout(_ => {
@@ -59,6 +61,8 @@ export class GameState {
         this.letterReady = false;
         if (!result) {
             this.winner = this.lastPerson.name;
+            this.lastPerson.score++;
+            this._settingsService.saveSettings('persons', this._persons);
             this.lastPerson.score++;
             this._showReward();
         }
