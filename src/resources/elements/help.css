@@ -13,9 +13,22 @@ help {
         }
     }
 
+    @media screen and (max-width: 600px) {
+        h2 {
+            font-family: 'Bungee Inline', sans-serif;
+            font-size  : 2.5rem;
+        }
+
+        li {
+            font-size  : 1.4rem;
+            line-height: 2rem;
+        }
+    }
+
     ul {
         max-width: 55ch;
         margin   : 0 auto;
+        padding  : 0;
     }
 
     li {
@@ -49,6 +62,9 @@ help {
 
     /*   Closed state of the dialog   */
     dialog {
+        position        : fixed;
+        top             : 0;
+        left            : 0;
         width           : 100vw;
         height          : 100dvh;
         max-width       : none;
