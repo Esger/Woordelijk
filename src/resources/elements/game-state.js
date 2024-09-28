@@ -24,6 +24,7 @@ export class GameState {
     }
 
     _start(persons) {
+        this._historicPersons = this._settingsService.getSettings('historicPersons');
         this._persons = persons;
         this.person = this._randomPerson();
         this.state = 1;
@@ -38,7 +39,7 @@ export class GameState {
     _bounce() {
         this.winner = this.person.name;
         this.person.score++;
-        this._settingsService.saveSettings('persons', this._persons);
+        this._saveSettings();
         this._showReward();
         const halfway = this._rewardDuration / 2;
         setTimeout(_ => {
@@ -62,10 +63,21 @@ export class GameState {
         if (!result) {
             this.winner = this.lastPerson.name;
             this.lastPerson.score++;
-            this._settingsService.saveSettings('persons', this._persons);
+            this._saveSettings();
             this.lastPerson.score++;
             this._showReward();
         }
+    }
+
+    _saveSettings() {
+        this._persons.forEach(person => {
+            const indexOfHistoricPerson = this._historicPersons.findIndex(historicPerson => historicPerson.name == person.name);
+            if (indexOfHistoricPerson > -1) {
+                this._historicPersons[indexOfHistoricPerson].score = person.score;
+            }
+        });
+        this._settingsService.saveSettings('persons', this._persons);
+        this._settingsService.saveSettings('historicPersons', this._historicPersons);
     }
 
     _showReward() {
