@@ -1,4 +1,4 @@
-names {
+persons {
     display       : flex;
     flex-direction: column;
     align-items   : stretch;
@@ -14,9 +14,10 @@ names {
         display        : flex;
         justify-content: space-between;
         align-items    : center;
+        gap            : 20px;
 
-        button {
-            margin-left: 10px;
+        output {
+            margin-left: auto;
         }
     }
 

@@ -1,20 +1,20 @@
 <template>
     <require from="./game-state.css"></require>
-    <require from="./names"></require>
+    <require from="./persons"></require>
     <require from="./game"></require>
     <require from="./result"></require>
     <require from="./smoke"></require>
 
-    <names if.bind="state == 0"
-           class="au-animate animate-fadeIn"></names>
+    <persons if.bind="state == 0"
+             class="au-animate animate-fadeIn"></persons>
     <game if.bind="state == 1"
           class="au-animate animate-fadeIn"
-          name.bind="name"
+          name.bind="person.name"
           letter-ready.bind="letterReady"
           show-reward.bind="showReward"></game>
     <result if.bind="state == 2"
             class="au-animate animate-fadeIn"
-            name.bind="name"
+            name.bind="person.name"
             show-reward.bind="showReward"></result>
     <smoke name.bind="winner"
            show-reward.bind="showReward"></smoke>

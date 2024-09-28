@@ -39,7 +39,7 @@ body {
     &:before {
         background-image: url('assets/smoke-gas.gif');
         rotate          : -243deg;
-        translate       : -12dvw 55dvw;
+        translate       : -12dvw 60dvw;
         scale           : 1.7;
         filter          : blur(4px);
         opacity         : .6;
