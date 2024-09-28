@@ -43,6 +43,7 @@ persons {
     }
 
     button.start {
-        margin: auto;
+        margin   : auto;
+        font-size: 4rem;
     }
 }
