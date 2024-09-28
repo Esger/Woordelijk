@@ -21,7 +21,6 @@ body {
     flex-direction  : column;
     align-items     : center;
     justify-content : center;
-    overflow        : hidden;
     background-color: var(--backgroundColor);
     color           : var(--mainColor);
     font-size       : 32px;
