@@ -12,6 +12,7 @@ export class PersonsCustomElement {
         this._settingsService = settingsService;
         this.persons = [];
         this.historicPersons = [];
+        this.gameTime = 30;
     }
 
     attached() {
@@ -63,9 +64,50 @@ export class PersonsCustomElement {
         this._settingsService.saveSettings('persons', this.persons);
     }
 
+    incrementTime() {
+        switch (true) {
+            case this.gameTime < 60:
+                this.gameTime += 10;
+                break;
+            case this.gameTime < 180:
+                this.gameTime += 30;
+                break;
+            default:
+                this.gameTime += 60;
+                break;
+        }
+        this.gameTime = this.gameTime % 3600;
+    }
+
+    decrementTime() {
+        switch (true) {
+            case this.gameTime >= 180:
+                this.gameTime -= 60;
+                break;
+            case this.gameTime > 60:
+                this.gameTime -= 30;
+                break;
+            case this.gameTime >= 40:
+                this.gameTime -= 10;
+                break;
+        }
+    }
+
     start() {
         if (this.persons.length < 1) return;
 
         this._eventAggregator.publish('start', this.persons);
+    }
+}
+
+export class TimeValueConverter {
+    toView(time) {
+        if (!time) return;
+        if (time < 60) return time + ' sec.';
+        else return time / 60 + ' min.'
+    }
+
+    fromView(time) {
+        return parseInt(time, 10);
     }
 }

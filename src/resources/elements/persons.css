@@ -43,7 +43,7 @@ dialog {
     ul {
         padding-left : 0;
         width        : 100%;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
     }
 
 
@@ -57,16 +57,68 @@ dialog {
         }
     }
 
-    button.start {
-        margin   : auto;
-        font-size: 4rem;
-        flex     : 0 0 5.5rem;
+    form.start fieldset {
+        gap            : 0;
+        padding        : 0;
+        min-inline-size: 1rem;
+
+        input {
+            border-top-right-radius   : 0;
+            border-bottom-right-radius: 0;
+            padding-inline            : 2rem 0;
+            max-width                 : 11rem;
+
+            @media screen and (max-width: 600px) {
+                max-width     : 5rem;
+                padding-inline: 1rem .5rem;
+            }
+
+            &::-webkit-inner-spin-button {
+                flex: 0 0 1.4rem;
+            }
+
+            &::editing-view-port::after {
+                content: 'sec';
+            }
+        }
+
+        button {
+            border-top-left-radius   : 0;
+            border-bottom-left-radius: 0;
+
+            @media screen and (max-width: 600px) {
+                flex: 0 0 5.6rem;
+            }
+        }
     }
 
-    button.resetScore {
-        padding  : .2rem;
-        flex     : 0 0 2rem;
-        font-size: 1.6rem;
+    button {
+        &.start {
+            font-size: 4rem;
+            flex     : 0 0 6.5rem;
+        }
+
+        &.resetScore {
+            padding  : .4rem;
+            flex     : 0 0 2.4rem;
+            font-size: 1.6rem;
+        }
+    }
+
+    .steppers button {
+        border-radius: 0;
+
+        @media screen and (max-width: 600px) {
+            padding: 10px;
+        }
+
+        &:first-child svg {
+            translate: 0 .4rem;
+        }
+
+        &:last-child svg {
+            translate: 0 -.4rem;
+        }
     }
 }
 
