@@ -75,7 +75,7 @@ leader-board {
         color           : var(--mainColor);
         opacity         : 0;
         transform-origin: calc(100% - 2.3rem) 2.3rem;
-        transform       : rotate(90deg);
+        transform       : rotate(145deg);
         transition      :
             opacity var(--time) ease-out,
             transform var(--time) ease-in,
@@ -92,7 +92,7 @@ leader-board {
     @starting-style {
         dialog[open] {
             opacity  : 0;
-            transform: rotate(90deg);
+            transform: rotate(145deg);
         }
     }
 }

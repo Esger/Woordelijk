@@ -16,12 +16,13 @@ leader-board {
     /*   Closed state of the dialog   */
     dialog {
         transform-origin: calc(2.3rem) 2.3rem;
-        transform       : rotate(-90deg);
+        transform       : rotate(-145deg);
+        place-content   : center;
     }
 
     @starting-style {
         dialog[open] {
-            transform: rotate(-90deg);
+            transform: rotate(-145deg);
         }
     }
 }
