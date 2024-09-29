@@ -60,4 +60,16 @@ dialog {
         font-size: 4rem;
         flex     : 0 0 5.5rem;
     }
+
+    button.resetScore {
+        padding  : .2rem;
+        flex     : 0 0 2rem;
+        font-size: 1.6rem;
+    }
+}
+
+dialog {
+    button.resetScore {
+        padding: 0;
+    }
 }

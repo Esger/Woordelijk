@@ -56,6 +56,13 @@ export class PersonsCustomElement {
         this._settingsService.saveSettings('persons', this.persons);
     }
 
+    resetScore(name) {
+        const person = this.persons.find(person => person.name == name);
+        if (!person) return;
+        person.score = 0;
+        this._settingsService.saveSettings('persons', this.persons);
+    }
+
     start() {
         if (this.persons.length < 1) return;
 
