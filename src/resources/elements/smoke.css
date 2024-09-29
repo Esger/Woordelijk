@@ -1,6 +1,9 @@
 smoke {
     position      : fixed;
-    inset         : 0;
+    left          : 0;
+    top           : 0;
+    height        : 100vmax;
+    width         : 100vw;
     display       : block;
     height        : 100dvh;
     pointer-events: none;
@@ -15,14 +18,21 @@ smoke {
         z-index  : 1;
     }
 
+    @media screen and (max-width: 600px) {
+        h1 {
+            font-size: 6rem;
+        }
+    }
+
     .smoke {
         position           : absolute;
-        width              : 100vmax;
-        height             : 100vmax;
+        width              : 100vw;
+        height             : 100dvh;
         background-image   : url('assets/smoke-puff.gif');
         background-repeat  : no-repeat;
         background-size    : cover;
         background-position: center;
         pointer-events     : none;
+        touch-action       : none;
     }
 }

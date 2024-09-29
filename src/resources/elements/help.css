@@ -25,6 +25,10 @@ help {
         }
     }
 
+    h2 {
+        text-align: left;
+    }
+
     ul {
         max-width: 55ch;
         margin   : 0 auto;
