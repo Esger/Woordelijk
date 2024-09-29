@@ -3,7 +3,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { SettingsService } from 'services/settings-service';
 @inject(EventAggregator, SettingsService)
 export class PersonsCustomElement {
-    title = 'Wie doet er mee?';
+    title = 'Strijders';
     minLength = 1;
     name;
 
@@ -53,6 +53,13 @@ export class PersonsCustomElement {
         const person = this.persons.find(person => person.name == name);
         if (!person) return;
         this.persons.splice(this.persons.indexOf(person), 1);
+        this._settingsService.saveSettings('persons', this.persons);
+    }
+
+    resetScore(name) {
+        const person = this.persons.find(person => person.name == name);
+        if (!person) return;
+        person.score = 0;
         this._settingsService.saveSettings('persons', this.persons);
     }
 
