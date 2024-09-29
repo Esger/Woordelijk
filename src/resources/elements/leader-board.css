@@ -1,0 +1,27 @@
+leader-board {
+
+    button {
+
+        &.open,
+        &.close {
+            left : 0;
+            right: auto;
+        }
+
+        &.start {
+            display: none;
+        }
+    }
+
+    /*   Closed state of the dialog   */
+    dialog {
+        transform-origin: calc(2.3rem) 2.3rem;
+        transform       : rotate(-90deg);
+    }
+
+    @starting-style {
+        dialog[open] {
+            transform: rotate(-90deg);
+        }
+    }
+}

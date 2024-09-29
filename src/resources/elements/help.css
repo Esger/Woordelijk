@@ -1,7 +1,9 @@
-help {
+help,
+leader-board {
     --time: 0.5s;
 
-    button {
+    button.open,
+    button.close {
         position        : absolute;
         right           : 0;
         top             : 0;
@@ -17,11 +19,6 @@ help {
         h2 {
             font-family: 'Bungee Inline', sans-serif;
             font-size  : 2.5rem;
-        }
-
-        li {
-            font-size  : 1.4rem;
-            line-height: 2rem;
         }
     }
 
@@ -96,6 +93,20 @@ help {
         dialog[open] {
             opacity  : 0;
             transform: rotate(90deg);
+        }
+    }
+}
+
+help {
+    @media screen and (max-width: 600px) {
+        h2 {
+            font-family: 'Bungee Inline', sans-serif;
+            font-size  : 2.5rem;
+        }
+
+        li {
+            font-size  : 1.4rem;
+            line-height: 2rem;
         }
     }
 }

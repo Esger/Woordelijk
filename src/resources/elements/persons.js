@@ -3,7 +3,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { SettingsService } from 'services/settings-service';
 @inject(EventAggregator, SettingsService)
 export class PersonsCustomElement {
-    title = 'Wie doet er mee?';
+    title = 'Strijders';
     minLength = 1;
     name;
 

@@ -3,7 +3,8 @@
 
     <h2>${title}</h2>
 
-    <form submit.delegate="addName(name)">
+    <form class="addName"
+          submit.delegate="addName(name)">
         <input type="text"
             value.bind="name"
             minlength.bind="minLength"
@@ -36,7 +37,7 @@
             </button>
         </li>
     </ul>
-    <form class="fadeInOut ${persons.length > 1 ? 'show' : 'hide'}"
+    <form class="start fadeInOut ${persons.length > 1 ? 'show' : 'hide'}"
           submit.delegate="start()">
         <button class="start"
             click.delegate="start()">
