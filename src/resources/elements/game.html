@@ -1,6 +1,7 @@
 <template>
     <require from="./game.css"></require>
     <require from="./random-letter"></require>
+    <require from="./progress-bar"></require>
 
     <h2>${name}</h2>
 
@@ -33,5 +34,8 @@
             </button>
         </fieldset>
     </form>
+
+    <progress-bar if.bind="timedGame"
+                  value.bind="gameTime"></progress-bar>
 
 </template>

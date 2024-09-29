@@ -5,6 +5,8 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 export class Result {
     @bindable name = '';
     @bindable showReward = false;
+    @bindable timedGame = false;
+    @bindable gameTime = 0;
 
     constructor(EventAggregator) {
         this._eventAggregator = EventAggregator;

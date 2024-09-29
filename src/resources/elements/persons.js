@@ -12,7 +12,6 @@ export class PersonsCustomElement {
         this._settingsService = settingsService;
         this.persons = [];
         this.historicPersons = [];
-        this.gameTime = 30;
     }
 
     attached() {
@@ -20,6 +19,7 @@ export class PersonsCustomElement {
         if (persons) this.persons = persons;
         const historicPersons = this._settingsService.getSettings('historicPersons');
         if (historicPersons?.length) this.historicPersons = historicPersons;
+        this.gameTime = this._settingsService.getSettings('gameTime') || 30;
         this._playKeyPressedSubscription = this._eventAggregator.subscribeOnce('playKeyPressed', _ => setTimeout(_ => this.start()));
     }
 
@@ -77,6 +77,7 @@ export class PersonsCustomElement {
                 break;
         }
         this.gameTime = this.gameTime % 3600;
+        this._settingsService.saveSettings('gameTime', this.gameTime);
     }
 
     decrementTime() {
@@ -91,23 +92,16 @@ export class PersonsCustomElement {
                 this.gameTime -= 10;
                 break;
         }
+        this._settingsService.saveSettings('gameTime', this.gameTime);
     }
 
-    start() {
+    start(timed = false) {
         if (this.persons.length < 1) return;
 
-        this._eventAggregator.publish('start', this.persons);
-    }
-}
-
-export class TimeValueConverter {
-    toView(time) {
-        if (!time) return;
-        if (time < 60) return time + ' sec.';
-        else return time / 60 + ' min.'
-    }
-
-    fromView(time) {
-        return parseInt(time, 10);
+        this._eventAggregator.publish('start', {
+            persons: this.persons,
+            time: this.gameTime,
+            timed: timed
+        });
     }
 }

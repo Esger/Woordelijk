@@ -11,11 +11,15 @@
           class="au-animate animate-fadeIn"
           name.bind="person.name"
           letter-ready.bind="letterReady"
-          show-reward.bind="showReward"></game>
+          show-reward.bind="showReward"
+          timed-game.bind="timedGame"
+          game-time.bind="gameTime"></game>
     <result if.bind="state == 2"
             class="au-animate animate-fadeIn"
             name.bind="person.name"
-            show-reward.bind="showReward"></result>
+            show-reward.bind="showReward"
+            timed-game.bind="timedGame"
+            game-time.bind="gameTime"></result>
     <smoke name.bind="winner"
            show-reward.bind="showReward"></smoke>
 </template>

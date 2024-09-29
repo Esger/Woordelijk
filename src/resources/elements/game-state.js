@@ -16,7 +16,15 @@ export class GameState {
     }
 
     attached() {
-        this._startSubscription = this._eventAggregator.subscribe('start', person => this._start(person));
+        this._startSubscription = this._eventAggregator.subscribe('start', data => {
+            this._start(data.persons);
+            if (data.timed) {
+                this.timedGame = true;
+                this.gameTime = data.time;
+            } else {
+                this.timedGame = false;
+            }
+        });
         this._lostSubscription = this._eventAggregator.subscribe('gameResult', result => this._finish(result));
         this._bounceSubscription = this._eventAggregator.subscribe('bounce', _ => this._bounce());
         this._nextSubscription = this._eventAggregator.subscribe('next', _ => this._next());

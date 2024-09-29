@@ -1,0 +1,18 @@
+progress-bar {
+    --value         : 100%;
+    --gradientColor : var(--mainColor);
+    position        : fixed;
+    bottom          : 0;
+    left            : 0;
+    right           : 0;
+    height          : 2rem;
+    z-index         : 1;
+    background-image: linear-gradient(to right, var(--gradientColor) 0 var(--value), transparent 0 100%);
+
+    p {
+        color         : var(--backgroundColor);
+        font-size     : 1rem;
+        line-height   : 2rem;
+        padding-inline: 1rem;
+    }
+}
