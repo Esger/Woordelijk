@@ -4,6 +4,8 @@ persons {
     align-items   : stretch;
     position      : relative;
     z-index       : 1;
+    max-width     : 30ch;
+    margin        : auto;
 
     li {
         margin-bottom  : 1rem;
@@ -69,6 +71,9 @@ dialog {
 }
 
 dialog {
+    /* display      : grid;
+    place-content: center; */
+
     button.resetScore {
         padding: 0;
     }
