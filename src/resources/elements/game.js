@@ -21,13 +21,13 @@ export class Game {
     detached() {
         this._escapeKeyPressedSubscription.dispose();
         this._playKeyPressedSubscription.dispose();
-        clearInterval(this.interval);
+        this._stopTimer();
     }
 
     next() {
         if (!this.letterReady || this.showReward) return;
         this._eventAggregator.publish('next');
-        clearInterval(this.interval);
+        this._stopTimer();
     }
 
     bounce() {
@@ -37,14 +37,19 @@ export class Game {
 
     _startTimer() {
         if (!this.timedGame) return;
-        clearInterval(this.interval);
+        this._stopTimer();
         this.interval = setInterval(_ => {
             if (this.gameTime <= 0) {
-                clearInterval(this.interval);
-                this.next();
+                this._eventAggregator.publish('timeOver');
+                this._stopTimer();
                 return;
             }
             this.gameTime -= .02;
         }, 20);
+    }
+
+    _stopTimer() {
+        clearInterval(this.interval);
+        this.interval = null;
     }
 }

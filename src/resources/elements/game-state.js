@@ -29,6 +29,7 @@ export class GameState {
         this._bounceSubscription = this._eventAggregator.subscribe('bounce', _ => this._bounce());
         this._nextSubscription = this._eventAggregator.subscribe('next', _ => this._next());
         this._spinnerReadySubscription = this._eventAggregator.subscribe('spinnerReady', _ => this.letterReady = true);
+        this._timeOverSubscription = this._eventAggregator.subscribe('timeOver', _ => this._nextPerson());
     }
 
     _start(persons) {
@@ -36,6 +37,14 @@ export class GameState {
         this._persons = persons;
         this.person = this._randomPerson();
         this.state = 1;
+    }
+
+    _nextPerson() {
+        this.person = this._nextName();
+        this.state = undefined;
+        setTimeout(_ => {
+            this.state = 1;
+        });
     }
 
     _next() {
@@ -104,6 +113,7 @@ export class GameState {
         this._bounceSubscription.dispose();
         this._nextSubscription.dispose();
         this._spinnerReadySubscription.dispose();
+        this._timeOverSubscription.dispose();
     }
 
 }

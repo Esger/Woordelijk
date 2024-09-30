@@ -22,25 +22,29 @@ export class Result {
     detached() {
         this._playKeyPressedSubscription.dispose();
         this._escapeKeyPressedSubscription.dispose();
-        clearInterval(this.interval);
+        this._stopTimer();
     }
 
     gameResult(result) {
         if (this._decided || this.showReward) return;
         this._decided = true;
-        clearInterval(this.interval);
         this._eventAggregator.publish('gameResult', result);
+        this._stopTimer();
     }
     _startTimer() {
         if (!this.timedGame) return;
-        clearInterval(this.interval);
+        this._stopTimer();
         this.interval = setInterval(_ => {
             if (this.gameTime <= 0) {
-                clearInterval(this.interval);
+                this._stopTimer();
                 this.gameResult(false);
                 return;
             }
             this.gameTime -= .02;
         }, 20);
+    }
+    _stopTimer() {
+        clearInterval(this.interval);
+        this.interval = null;
     }
 }

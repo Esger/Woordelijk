@@ -7,9 +7,11 @@ progress-bar {
     right           : 0;
     height          : 2rem;
     z-index         : 1;
+    opacity         : .7;
     background-image: linear-gradient(to right, var(--gradientColor) 0 var(--value), transparent 0 100%);
 
     p {
+        font-family   : 'Bungee Inline', sans-serif;
         color         : var(--backgroundColor);
         font-size     : 1rem;
         line-height   : 2rem;
