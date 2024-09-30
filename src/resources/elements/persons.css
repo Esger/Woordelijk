@@ -29,6 +29,10 @@ persons {
 
         button {
             flex: 0 0 4rem;
+
+            &.startTimed {
+                flex: 0 0 5.8rem;
+            }
         }
     }
 
@@ -110,6 +114,10 @@ dialog {
 
         @media screen and (max-width: 600px) {
             padding: 10px;
+        }
+
+        svg {
+            scale: 1.25;
         }
 
         &:first-child svg {

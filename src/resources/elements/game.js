@@ -21,11 +21,13 @@ export class Game {
     detached() {
         this._escapeKeyPressedSubscription.dispose();
         this._playKeyPressedSubscription.dispose();
+        clearInterval(this.interval);
     }
 
     next() {
         if (!this.letterReady || this.showReward) return;
         this._eventAggregator.publish('next');
+        clearInterval(this.interval);
     }
 
     bounce() {
@@ -35,9 +37,11 @@ export class Game {
 
     _startTimer() {
         if (!this.timedGame) return;
-        const interval = setInterval(_ => {
+        clearInterval(this.interval);
+        this.interval = setInterval(_ => {
             if (this.gameTime <= 0) {
-                clearInterval(interval);
+                clearInterval(this.interval);
+                this.next();
                 return;
             }
             this.gameTime -= .02;
