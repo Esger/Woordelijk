@@ -30,9 +30,23 @@ persons {
         button {
             flex: 0 0 4rem;
 
-            &.startTimed {
-                flex: 0 0 5.8rem;
+            &.start {
+                display      : grid;
+                place-content: center;
+
+                svg {
+                    scale: 1.5;
+                }
             }
+        }
+
+        &.addName button svg {
+            scale           : 1.2;
+            transform-origin: left;
+        }
+
+        &.start {
+            flex-direction: column;
         }
     }
 
@@ -62,27 +76,34 @@ dialog {
     }
 
     form.start fieldset {
-        gap            : 0;
-        padding        : 0;
-        min-inline-size: 1rem;
+        background-color: var(--mainColor);
+        padding         : 0;
+        min-inline-size : 1rem;
 
-        input {
+        input[type='text'] {
             border-top-right-radius   : 0;
             border-bottom-right-radius: 0;
             padding-inline            : 2rem 0;
-            max-width                 : 11rem;
+            width                     : 10rem;
 
             @media screen and (max-width: 600px) {
                 max-width     : 5rem;
                 padding-inline: 1rem .5rem;
             }
 
-            &::-webkit-inner-spin-button {
-                flex: 0 0 1.4rem;
-            }
-
             &::editing-view-port::after {
                 content: 'sec';
+            }
+        }
+
+        input[type='checkbox'] {
+            margin          : 0 2.4rem;
+            color           : var(--backgroundColor);
+            accent-color    : var(--mainColorDimmed);
+            background-color: var(--mainColorDimmed);
+
+            &:checked {
+                accent-color: var(--mainColorDimmed);
             }
         }
 
@@ -94,40 +115,49 @@ dialog {
                 flex: 0 0 5.6rem;
             }
         }
-    }
 
-    button {
-        &.start {
-            font-size: 4rem;
-            flex     : 0 0 6.5rem;
-        }
+        .icon {
+            background-color: var(--mainColor);
+            width           : 5rem;
+            display         : grid;
+            place-content   : center;
 
-        &.resetScore {
-            padding  : .4rem;
-            flex     : 0 0 2.4rem;
-            font-size: 1.6rem;
-        }
-    }
-
-    .steppers button {
-        border-radius: 0;
-
-        @media screen and (max-width: 600px) {
-            padding: 10px;
-        }
-
-        svg {
-            scale: 1.25;
-        }
-
-        &:first-child svg {
-            translate: 0 .4rem;
-        }
-
-        &:last-child svg {
-            translate: 0 -.4rem;
+            svg {
+                color           : var(--backgroundColor);
+                scale           : 1.5;
+                transform-origin: left;
+            }
         }
     }
+}
+
+button {
+    &.resetScore {
+        padding  : .4rem;
+        flex     : 0 0 2.4rem;
+        font-size: 1.6rem;
+    }
+}
+
+.steppers button {
+    border-radius: 0;
+
+    @media screen and (max-width: 600px) {
+        padding: 10px;
+    }
+
+    svg {
+        scale: 1.25;
+    }
+
+    &:first-child svg {
+        translate: 0 .4rem;
+    }
+
+    &:last-child svg {
+        translate: 0 -.4rem;
+    }
+}
 }
 
 dialog {

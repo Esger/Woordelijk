@@ -10,6 +10,7 @@
             value.bind="name"
             minlength.bind="minLength"
             id="name"
+            placeholder="Naam"
             required>
         <button type="submit"
             click.delegate="addName(name)">
@@ -22,6 +23,7 @@
             </svg>
         </button>
     </form>
+
     <ul>
         <li repeat.for="person of persons">
             <span>${person.name}</span>
@@ -48,9 +50,19 @@
             </button>
         </li>
     </ul>
+
     <form class="start fadeInOut ${persons.length > 1 ? 'show' : 'hide'}"
           submit.delegate="start()">
         <fieldset>
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M12 4a8 8 0 1 0 0 16a8 8 0 0 0 0-16M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12m10-6a1 1 0 0 1 1 1v4.586l2.707 2.707a1 1 0 0 1-1.414 1.414l-3-3A1 1 0 0 1 11 12V7a1 1 0 0 1 1-1" />
+                </svg>
+            </div>
             <input type="text"
                     value.bind="gameTime | time"
                     readonly
@@ -77,17 +89,9 @@
                     </svg>
                 </button>
             </div>
-            <button class="start startTimed"
-                  click.delegate="start(true)"
-                  title="Begin spel met een beperkte tijd">
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                       width="1em"
-                       height="1em"
-                       viewBox="0 0 24 24">
-                      <path fill="currentColor"
-                            d="M12 4a8 8 0 1 0 0 16a8 8 0 0 0 0-16M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12m10-6a1 1 0 0 1 1 1v4.586l2.707 2.707a1 1 0 0 1-1.414 1.414l-3-3A1 1 0 0 1 11 12V7a1 1 0 0 1 1-1" />
-                  </svg>
-              </button>
+            <input type="checkbox"
+                    checked.bind="timeLimited"
+                    change.trigger="setTimeLimit($event)">
         </fieldset>
         <button class="start"
             click.delegate="start(false)"

@@ -1,6 +1,5 @@
 <template>
     <require from="./result.css"></require>
-    <require from="./progress-bar"></require>
 
     <h2>${name}</h2>
     <form submit.delegate="gameResult(true)">
@@ -25,8 +24,5 @@
             </svg>
         </button>
     </form>
-
-    <progress-bar if.bind="timedGame && interval"
-                  value.bind="gameTime"></progress-bar>
 
 </template>

@@ -5,11 +5,11 @@ export class ProgressBarCustomElement {
     @bindable value;
     constructor(element) {
         this.element = element;
-        this._initialValue;
     }
 
     attached() {
         this._setBarColor('green');
+        this._initialValue = undefined;
     }
 
     valueChanged(newValue) {

@@ -1,9 +1,10 @@
 <template>
     <require from="./game-state.css"></require>
+    <require from="./progress-bar"></require>
     <require from="./persons"></require>
-    <require from="./game"></require>
     <require from="./result"></require>
     <require from="./smoke"></require>
+    <require from="./game"></require>
 
     <persons if.bind="state == 0"
              class="au-animate animate-fadeIn"></persons>
@@ -12,14 +13,16 @@
           name.bind="person.name"
           letter-ready.bind="letterReady"
           show-reward.bind="showReward"
-          timed-game.bind="timedGame"
+          timed-game.bind="timeLimited"
           game-time.bind="gameTime"></game>
     <result if.bind="state == 2"
             class="au-animate animate-fadeIn"
             name.bind="person.name"
             show-reward.bind="showReward"
-            timed-game.bind="timedGame"
+            timed-game.bind="timeLimited"
             game-time.bind="gameTime"></result>
+    <progress-bar if.bind="timeLimited && interval"
+                  value.bind="gameTime"></progress-bar>
     <smoke name.bind="winner"
            show-reward.bind="showReward"></smoke>
 </template>

@@ -10,8 +10,8 @@ export class PersonsCustomElement {
     constructor(eventAggregator, settingsService) {
         this._eventAggregator = eventAggregator;
         this._settingsService = settingsService;
-        this.persons = [];
         this.historicPersons = [];
+        this.persons = [];
     }
 
     attached() {
@@ -20,7 +20,7 @@ export class PersonsCustomElement {
         const historicPersons = this._settingsService.getSettings('historicPersons');
         if (historicPersons?.length) this.historicPersons = historicPersons;
         this.gameTime = this._settingsService.getSettings('gameTime') || 30;
-        this._playKeyPressedSubscription = this._eventAggregator.subscribeOnce('playKeyPressed', _ => setTimeout(_ => this.start()));
+        this.timeLimited = this._settingsService.getSettings('timeLimited') || false;
     }
 
     newPerson(name) {
@@ -95,13 +95,12 @@ export class PersonsCustomElement {
         this._settingsService.saveSettings('gameTime', this.gameTime);
     }
 
-    start(timed = false) {
-        if (this.persons.length < 1) return;
+    setTimeLimit(event) {
+        const timeLimited = event.target.checked;
+        this._settingsService.saveSettings('timeLimited', timeLimited);
+    }
 
-        this._eventAggregator.publish('start', {
-            persons: this.persons,
-            time: this.gameTime,
-            timed: timed
-        });
+    start() {
+        this._eventAggregator.publish('start');
     }
 }

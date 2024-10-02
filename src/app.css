@@ -7,9 +7,11 @@
     *,
     *:before,
     *:after {
-        --mainColor      : green;
-        --backgroundColor: black;
-        --smoke          : #f4f4f4;
+        --mainColor            : green;
+        --backgroundColor      : black;
+        --smoke                : #f4f4f4;
+        --backgroundColorDimmed: color-mix(in srgb, var(--backgroundColor), 40% white);
+        --mainColorDimmed      : color-mix(in srgb, var(--mainColor), 30% white);
     }
 }
 
@@ -109,12 +111,13 @@ input {
 
 input {
     &::placeholder {
-        font-weight: normal;
-        color      : var(--mainColor);
+        font-weight     : normal;
+        background-color: var(--mainColorDimmed);
+        color           : var(--smoke);
     }
 
     &:focus-within {
-        outline: 1px solid greenyellow;
+        outline: none;
     }
 
     @media screen and (max-width: 600px) {
