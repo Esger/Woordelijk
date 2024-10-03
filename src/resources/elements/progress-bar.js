@@ -3,6 +3,7 @@ import { bindable, inject } from 'aurelia-framework';
 @inject(Element)
 export class ProgressBarCustomElement {
     @bindable value;
+    @bindable state;
     constructor(element) {
         this.element = element;
     }
@@ -17,13 +18,15 @@ export class ProgressBarCustomElement {
             this._initialValue = newValue;
         const percentage = (1 - (this._initialValue - newValue) / this._initialValue) * 100;
         this.element.style.setProperty('--value', percentage + '%');
-        if (percentage < 33)
+        if (percentage < 33) {
             this._setBarColor('orange');
+            this.targetElement = document.getElementById('time');
+        }
         if (percentage < 15)
-            this._setBarColor('red');
+            this._setBarColor('crimson');
     }
 
     _setBarColor(color) {
-        this.element.style.setProperty('--gradientColor', color);
+        document.body.style.setProperty('--gradientColor', color);
     }
 }

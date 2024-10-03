@@ -1,6 +1,5 @@
 progress-bar {
     --value         : 100%;
-    --gradientColor : var(--mainColor);
     position        : fixed;
     bottom          : 0;
     left            : 0;
@@ -17,4 +16,12 @@ progress-bar {
         line-height   : 2rem;
         padding-inline: 1rem;
     }
+}
+
+#time span:not(:empty) {
+    color         : var(--gradientColor);
+    font-size     : 8rem;
+    line-height   : 1rem;
+    margin-left   : 2rem;
+    vertical-align: middle;
 }

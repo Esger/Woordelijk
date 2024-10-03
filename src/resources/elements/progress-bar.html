@@ -1,6 +1,8 @@
 <template>
     <require from="./progress-bar.css"></require>
     <require from="resources/value-converters/time-value-converter"></require>
+    <require from="resources/value-converters/time-almost-up-value-converter"></require>
 
     <p>${value | time}</p>
+    <span if.bind="targetElement" portal.bind="targetElement">${value | timeAlmostUp}</span>
 </template>
