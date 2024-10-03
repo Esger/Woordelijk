@@ -89,6 +89,7 @@ dialog {
             @media screen and (max-width: 600px) {
                 max-width     : 5rem;
                 padding-inline: 1rem .5rem;
+                font-size     : 2rem;
             }
 
             &::editing-view-port::after {
@@ -101,6 +102,10 @@ dialog {
             color           : var(--backgroundColor);
             accent-color    : var(--mainColorDimmed);
             background-color: var(--mainColorDimmed);
+
+            @media screen and (max-width: 600px) {
+                margin: 0 1rem;
+            }
 
             &:checked {
                 accent-color: var(--mainColorDimmed);
@@ -121,6 +126,10 @@ dialog {
             width           : 5rem;
             display         : grid;
             place-content   : center;
+
+            @media screen and (max-width: 600px) {
+                width: 3rem;
+            }
 
             svg {
                 color           : var(--backgroundColor);
