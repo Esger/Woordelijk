@@ -10,7 +10,6 @@ export class GameState {
         this._rewardDuration = 800;
         this._direction = 1;
         this.letterReady = false;
-        this.letterReady = false;
         this.showReward = false;
         this.timeLimited = false;
         this.winner = '';
