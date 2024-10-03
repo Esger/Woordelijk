@@ -142,6 +142,7 @@ export class GameState {
         this._stopTimer();
         this.interval = setInterval(_ => {
             if (this.gameTime <= 0) {
+                this.letterReady = false;
                 switch (this.state) {
                     case 1: this._repeatStateNextPerson(); break;
                     case 2: this._finish(false); break;
