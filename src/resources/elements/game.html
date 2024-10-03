@@ -6,7 +6,8 @@
 
     <random-letter show-reward.bind="showReward"></random-letter>
 
-    <form submit.delegate="next()">
+    <form submit.delegate="next()"
+          class="fadeInOut ${letterReady ? 'show': 'hide'}">
         <fieldset class="fadeInOut ${letterReady ? 'show': 'hide'}">
             <button type="button"
                   title="bounce"

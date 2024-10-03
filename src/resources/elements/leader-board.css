@@ -8,11 +8,11 @@ leader-board {
             right: auto;
         }
 
+        &.start {
+            display: none !important;
+        }
     }
 
-    form.start {
-        display: none;
-    }
 
     /*   Closed state of the dialog   */
     dialog {

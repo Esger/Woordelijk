@@ -1,8 +1,8 @@
 export class TimeValueConverter {
-    toView(time) {
+    toView(time, short = false) {
         if (!time) return;
-        if (time < 60) return Math.round(time) + ' sec.';
-        else return Math.round(time / 60) + ' min.'
+        if (time < 60) return Math.floor(time);
+        else return Math.floor(time / 60) + ':' + Math.floor(time % 60);
     }
 
     fromView(time) {
