@@ -66,6 +66,9 @@ export class PersonsCustomElement {
 
     incrementTime() {
         switch (true) {
+            case this.gameTime < 30:
+                this.gameTime += 5;
+                break;
             case this.gameTime < 60:
                 this.gameTime += 10;
                 break;
@@ -90,6 +93,9 @@ export class PersonsCustomElement {
                 break;
             case this.gameTime >= 40:
                 this.gameTime -= 10;
+                break;
+            case this.gameTime > 5:
+                this.gameTime -= 5;
                 break;
         }
         this._settingsService.saveSettings('gameTime', this.gameTime);
