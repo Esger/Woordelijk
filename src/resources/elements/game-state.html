@@ -23,7 +23,8 @@
             timed-game.bind="timeLimited"
             game-time.bind="gameTime"></result>
     <progress-bar if.bind="timeLimited && interval"
-                  value.bind="gameTime"></progress-bar>
+                  value.bind="gameTime"
+                  letter-ready.bind="letterReady"></progress-bar>
     <smoke name.bind="winner"
            show-reward.bind="showReward"></smoke>
     <leader-board if.bind="state > 0"
