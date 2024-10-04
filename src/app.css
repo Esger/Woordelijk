@@ -103,9 +103,10 @@ form {
 }
 
 fieldset {
-    border : none;
-    display: flex;
-    gap    : 20px;
+    border       : none;
+    display      : flex;
+    gap          : 20px;
+    border-radius: 4px;
 }
 
 button,
