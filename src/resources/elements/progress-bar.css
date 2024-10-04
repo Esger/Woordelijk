@@ -1,0 +1,27 @@
+progress-bar {
+    --value         : 100%;
+    position        : fixed;
+    bottom          : 0;
+    left            : 0;
+    right           : 0;
+    height          : 2rem;
+    z-index         : 1;
+    opacity         : .7;
+    background-image: linear-gradient(to right, var(--gradientColor) 0 var(--value), transparent 0 100%);
+
+    p {
+        font-family   : 'Bungee Inline', sans-serif;
+        color         : var(--backgroundColor);
+        font-size     : 1rem;
+        line-height   : 2rem;
+        padding-inline: 1rem;
+    }
+}
+
+#time span:not(:empty) {
+    color         : var(--gradientColor);
+    font-size     : 8rem;
+    line-height   : 1rem;
+    margin-left   : 2rem;
+    vertical-align: middle;
+}

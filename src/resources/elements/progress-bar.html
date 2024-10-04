@@ -1,0 +1,8 @@
+<template>
+    <require from="./progress-bar.css"></require>
+    <require from="resources/value-converters/time-value-converter"></require>
+    <require from="resources/value-converters/time-almost-up-value-converter"></require>
+
+    <p>${value | time}</p>
+    <span if.bind="value < 11" portal.bind="targetElement">${value | time}</span>
+</template>

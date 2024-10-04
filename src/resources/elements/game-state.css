@@ -1,3 +1,7 @@
+game-state {
+    margin-top: calc(1lh + 2rem);
+}
+
 game-state:has(persons)~leader-board {
     display: none;
 }

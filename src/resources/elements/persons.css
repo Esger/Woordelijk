@@ -29,6 +29,24 @@ persons {
 
         button {
             flex: 0 0 4rem;
+
+            &.start {
+                display      : grid;
+                place-content: center;
+
+                svg {
+                    scale: 1.5;
+                }
+            }
+        }
+
+        &.addName button svg {
+            scale           : 1.2;
+            transform-origin: left;
+        }
+
+        &.start {
+            flex-direction: column;
         }
     }
 
@@ -43,7 +61,7 @@ dialog {
     ul {
         padding-left : 0;
         width        : 100%;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
     }
 
 
@@ -57,16 +75,98 @@ dialog {
         }
     }
 
-    button.start {
-        margin   : auto;
-        font-size: 4rem;
-        flex     : 0 0 5.5rem;
+    form.start fieldset {
+        background-color: var(--mainColor);
+        padding         : 0;
+        min-inline-size : 1rem;
+
+        input[type='text'] {
+            border-top-right-radius   : 0;
+            border-bottom-right-radius: 0;
+            padding-inline            : 2rem 0;
+            width                     : 10rem;
+
+            @media screen and (max-width: 600px) {
+                max-width     : 8rem;
+                padding-inline: 1rem .5rem;
+                font-size     : 2rem;
+            }
+
+            &::editing-view-port::after {
+                content: 'sec';
+            }
+        }
+
+        input[type='checkbox'] {
+            margin          : 0 2.4rem;
+            color           : var(--backgroundColor);
+            accent-color    : var(--mainColorDimmed);
+            background-color: var(--mainColorDimmed);
+
+            @media screen and (max-width: 600px) {
+                margin: 0 1.6rem;
+
+            }
+
+            &:checked {
+                margin      : 0 1.6rem;
+                accent-color: var(--mainColorDimmed);
+            }
+        }
+
+        button {
+            border-top-left-radius   : 0;
+            border-bottom-left-radius: 0;
+
+            @media screen and (max-width: 600px) {
+                flex: 0 0 5.6rem;
+            }
+        }
+
+        .icon {
+            background-color: var(--mainColor);
+            width           : 5rem;
+            display         : grid;
+            place-content   : center;
+
+            @media screen and (max-width: 600px) {
+                display: none;
+            }
+
+            svg {
+                color           : var(--backgroundColor);
+                scale           : 1.5;
+                transform-origin: left;
+            }
+        }
+    }
+}
+
+button {
+    &.resetScore {
+        padding  : .4rem;
+        flex     : 0 0 2.4rem;
+        font-size: 1.6rem;
+    }
+}
+
+.steppers button {
+    border-radius: 0;
+
+    @media screen and (max-width: 600px) {
+        padding: 10px;
     }
 
-    button.resetScore {
-        padding  : .2rem;
-        flex     : 0 0 2rem;
-        font-size: 1.6rem;
+    svg {
+        scale: 1.25;
+    }
+
+    &:first-child svg {
+        translate: 0 .4rem;
+    }
+
+    &:last-child svg {
+        translate: 0 -.4rem;
     }
 }
 

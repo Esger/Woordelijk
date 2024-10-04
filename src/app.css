@@ -7,13 +7,16 @@
     *,
     *:before,
     *:after {
-        --mainColor      : green;
-        --backgroundColor: black;
-        --smoke          : #f4f4f4;
+        --mainColor            : green;
+        --backgroundColor      : black;
+        --smoke                : #f4f4f4;
+        --backgroundColorDimmed: color-mix(in srgb, var(--backgroundColor), 40% white);
+        --mainColorDimmed      : color-mix(in srgb, var(--mainColor), 30% white);
     }
 }
 
 body {
+    --gradientColor : var(--mainColor);
     position        : fixed;
     overflow        : hidden;
     width           : 100vw;
@@ -59,19 +62,24 @@ h2 {
 }
 
 h1 {
-    font-size    : 4rem;
-    margin-bottom: 4rem;
-    filter       : drop-shadow(0 0 1px var(--mainColor)) drop-shadow(0 0 1px var(--mainColor));
+    font-size: 4rem;
+    filter   : drop-shadow(0 0 1px var(--mainColor)) drop-shadow(0 0 1px var(--mainColor));
 
     @media screen and (max-width: 600px) {
+        position : fixed;
+        top      : 4rem;
         font-size: 2.6rem;
     }
 }
 
 h2 {
     font-size    : 4rem;
-    font-weight  : normal;
+    font-weight  : bold;
     margin-bottom: 1rem;
+
+    @media screen and (max-width: 600px) {
+        font-size: 3rem;
+    }
 }
 
 form {
@@ -109,12 +117,13 @@ input {
 
 input {
     &::placeholder {
-        font-weight: normal;
-        color      : var(--mainColor);
+        font-weight     : normal;
+        background-color: var(--mainColorDimmed);
+        color           : var(--smoke);
     }
 
     &:focus-within {
-        outline: 1px solid greenyellow;
+        outline: none;
     }
 
     @media screen and (max-width: 600px) {

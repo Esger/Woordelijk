@@ -10,8 +10,8 @@ export class PersonsCustomElement {
     constructor(eventAggregator, settingsService) {
         this._eventAggregator = eventAggregator;
         this._settingsService = settingsService;
-        this.persons = [];
         this.historicPersons = [];
+        this.persons = [];
     }
 
     attached() {
@@ -19,7 +19,8 @@ export class PersonsCustomElement {
         if (persons) this.persons = persons;
         const historicPersons = this._settingsService.getSettings('historicPersons');
         if (historicPersons?.length) this.historicPersons = historicPersons;
-        this._playKeyPressedSubscription = this._eventAggregator.subscribeOnce('playKeyPressed', _ => setTimeout(_ => this.start()));
+        this.gameTime = this._settingsService.getSettings('gameTime') || 30;
+        this.timeLimited = this._settingsService.getSettings('timeLimited') || false;
     }
 
     newPerson(name) {
@@ -63,9 +64,49 @@ export class PersonsCustomElement {
         this._settingsService.saveSettings('persons', this.persons);
     }
 
-    start() {
-        if (this.persons.length < 1) return;
+    incrementTime() {
+        switch (true) {
+            case this.gameTime < 30:
+                this.gameTime += 5;
+                break;
+            case this.gameTime < 60:
+                this.gameTime += 10;
+                break;
+            case this.gameTime < 180:
+                this.gameTime += 30;
+                break;
+            default:
+                this.gameTime += 60;
+                break;
+        }
+        this.gameTime = this.gameTime % 3600;
+        this._settingsService.saveSettings('gameTime', this.gameTime);
+    }
 
-        this._eventAggregator.publish('start', this.persons);
+    decrementTime() {
+        switch (true) {
+            case this.gameTime >= 180:
+                this.gameTime -= 60;
+                break;
+            case this.gameTime > 60:
+                this.gameTime -= 30;
+                break;
+            case this.gameTime >= 40:
+                this.gameTime -= 10;
+                break;
+            case this.gameTime > 5:
+                this.gameTime -= 5;
+                break;
+        }
+        this._settingsService.saveSettings('gameTime', this.gameTime);
+    }
+
+    setTimeLimit(event) {
+        const timeLimited = event.target.checked;
+        this._settingsService.saveSettings('timeLimited', timeLimited);
+    }
+
+    start() {
+        this._eventAggregator.publish('start');
     }
 }

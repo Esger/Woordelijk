@@ -9,9 +9,10 @@ leader-board {
         }
 
         &.start {
-            display: none;
+            display: none !important;
         }
     }
+
 
     /*   Closed state of the dialog   */
     dialog {
