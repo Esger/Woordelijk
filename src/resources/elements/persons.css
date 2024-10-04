@@ -129,9 +129,16 @@ dialog {
 
 button {
     &.resetScore {
-        padding  : .4rem;
-        flex     : 0 0 2.4rem;
-        font-size: 1.6rem;
+        padding         : .4rem;
+        flex            : 0 0 2.4rem;
+        font-size       : 1.6rem;
+        background-color: var(--backgroundColor);
+
+        svg {
+            path {
+                fill: var(--mainColor)
+            }
+        }
     }
 }
 
