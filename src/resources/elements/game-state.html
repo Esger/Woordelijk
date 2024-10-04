@@ -1,4 +1,5 @@
 <template>
+    <require from="resources/elements/leader-board"></require>
     <require from="./game-state.css"></require>
     <require from="./progress-bar"></require>
     <require from="./persons"></require>
@@ -25,4 +26,7 @@
                   value.bind="gameTime"></progress-bar>
     <smoke name.bind="winner"
            show-reward.bind="showReward"></smoke>
+    <leader-board if.bind="state > 0"
+                  state.bind="state"></leader-board>
+
 </template>

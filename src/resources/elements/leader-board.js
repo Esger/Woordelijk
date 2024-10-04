@@ -2,6 +2,7 @@ import { bindable } from 'aurelia-framework';
 
 export class LeaderBoardCustomElement {
     @bindable persons;
+    @bindable state = 0;
 
 
     showLeaderBoard() {

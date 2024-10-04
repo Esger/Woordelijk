@@ -1,8 +1,9 @@
-import { inject } from 'aurelia-framework';
+import { inject, bindable } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { SettingsService } from 'services/settings-service';
 @inject(EventAggregator, SettingsService)
 export class PersonsCustomElement {
+    @bindable state = 0;
     title = 'Strijders';
     minLength = 1;
     name;
