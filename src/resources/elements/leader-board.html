@@ -17,7 +17,7 @@
         </form>
     </dialog>
     <button click.delegate="showLeaderBoard()"
-        disabled.bind="letterReady"
+        disabled.bind="letterReady && state == 1"
         class="open"
         title="Strijders">
         <svg xmlns="http://www.w3.org/2000/svg"
