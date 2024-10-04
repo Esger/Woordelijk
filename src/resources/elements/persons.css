@@ -50,7 +50,7 @@ persons {
         }
     }
 
-    input {
+    input:not(.toggle-checkbox) {
         flex     : 1;
         max-width: calc(100% - 5rem);
     }
@@ -85,6 +85,7 @@ dialog {
             border-bottom-right-radius: 0;
             padding-inline            : 2rem 0;
             width                     : 10rem;
+            box-shadow                : none;
 
             @media screen and (max-width: 600px) {
                 max-width     : 8rem;
@@ -94,23 +95,6 @@ dialog {
 
             &::editing-view-port::after {
                 content: 'sec';
-            }
-        }
-
-        input[type='checkbox'] {
-            margin          : 0 2.4rem;
-            color           : var(--backgroundColor);
-            accent-color    : var(--mainColorDimmed);
-            background-color: var(--mainColorDimmed);
-
-            @media screen and (max-width: 600px) {
-                margin: 0 1.6rem;
-
-            }
-
-            &:checked {
-                margin      : 0 1.6rem;
-                accent-color: var(--mainColorDimmed);
             }
         }
 

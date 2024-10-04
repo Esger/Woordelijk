@@ -2,6 +2,8 @@
     <require from="./persons.css"></require>
     <require from="resources/value-converters/time-value-converter"></require>
     <require from="resources/value-converters/time-with-unit-value-converter"></require>
+    <require from="attributes/squishy-switch"></require>
+    <require from="attributes/squishy-switch.css"></require>
 
     <h2>${title}</h2>
 
@@ -91,6 +93,7 @@
                 </button>
             </div>
             <input type="checkbox"
+                    squishy-switch
                     checked.bind="timeLimited"
                     change.trigger="setTimeLimit($event)">
         </fieldset>
