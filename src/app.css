@@ -55,7 +55,8 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3 {
     font-family: 'Bungee outline', sans-serif;
     text-align : center;
     font-weight: normal;
@@ -75,6 +76,17 @@ h1 {
 h2 {
     font-size    : 4rem;
     font-weight  : bold;
+    margin-bottom: 1rem;
+
+    @media screen and (max-width: 600px) {
+        font-size: 3rem;
+    }
+}
+
+h3 {
+    font-family  : 'Bungee inline', sans-serif;
+    font-size    : 4rem;
+    font-weight  : normal;
     margin-bottom: 1rem;
 
     @media screen and (max-width: 600px) {
