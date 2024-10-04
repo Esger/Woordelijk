@@ -11,6 +11,9 @@ h2 {
 }
 
 h3 {
-    position: fixed;
-    bottom  : 4rem;
+    position  : fixed;
+    bottom    : 4rem;
+    left      : 0;
+    width     : 100vw;
+    text-align: center;
 }
