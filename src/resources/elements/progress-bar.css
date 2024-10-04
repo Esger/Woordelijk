@@ -22,6 +22,5 @@ progress-bar {
     color         : var(--gradientColor);
     font-size     : 8rem;
     line-height   : 1rem;
-    margin-left   : 2rem;
     vertical-align: middle;
 }

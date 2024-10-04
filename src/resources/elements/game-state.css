@@ -9,3 +9,8 @@ game-state:has(persons)~leader-board {
 h2 {
     margin-bottom: 2rem;
 }
+
+h3 {
+    position: fixed;
+    bottom  : 4rem;
+}
