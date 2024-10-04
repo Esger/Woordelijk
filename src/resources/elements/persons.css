@@ -87,7 +87,7 @@ dialog {
             width                     : 10rem;
 
             @media screen and (max-width: 600px) {
-                max-width     : 5rem;
+                max-width     : 8rem;
                 padding-inline: 1rem .5rem;
                 font-size     : 2rem;
             }
@@ -104,10 +104,12 @@ dialog {
             background-color: var(--mainColorDimmed);
 
             @media screen and (max-width: 600px) {
-                margin: 0 1rem;
+                margin: 0 1.6rem;
+
             }
 
             &:checked {
+                margin      : 0 1.6rem;
                 accent-color: var(--mainColorDimmed);
             }
         }
@@ -128,7 +130,7 @@ dialog {
             place-content   : center;
 
             @media screen and (max-width: 600px) {
-                width: 3rem;
+                display: none;
             }
 
             svg {

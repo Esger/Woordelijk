@@ -1,6 +1,7 @@
 <template>
     <require from="./persons.css"></require>
     <require from="resources/value-converters/time-value-converter"></require>
+    <require from="resources/value-converters/time-with-unit-value-converter"></require>
 
     <h2>${title}</h2>
 
@@ -64,7 +65,7 @@
                 </svg>
             </div>
             <input type="text"
-                    value.bind="gameTime | time"
+                    value.bind="gameTime | timeWithUnit"
                     readonly
                     change.trigger="setTime($event)">
             <div class="steppers">
