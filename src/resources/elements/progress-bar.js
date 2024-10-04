@@ -2,8 +2,9 @@ import { bindable, inject } from 'aurelia-framework';
 
 @inject(Element)
 export class ProgressBarCustomElement {
-    @bindable value;
+    @bindable value = undefined;
     @bindable state;
+    @bindable letterReady = false;
     constructor(element) {
         this.element = element;
     }
