@@ -21,6 +21,7 @@ export class PersonsCustomElement {
         if (historicPersons?.length) this.historicPersons = historicPersons;
         this.gameTime = this._settingsService.getSettings('gameTime') || 30;
         this.timeLimited = this._settingsService.getSettings('timeLimited') || false;
+        this._settingsService.saveSettings('gameTime', this.gameTime);
     }
 
     newPerson(name) {
