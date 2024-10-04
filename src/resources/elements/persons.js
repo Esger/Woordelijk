@@ -104,6 +104,7 @@ export class PersonsCustomElement {
     setTimeLimit(event) {
         const timeLimited = event.target.checked;
         this._settingsService.saveSettings('timeLimited', timeLimited);
+        this._settingsService.saveSettings('gameTime', this.gameTime);
     }
 
     start() {
