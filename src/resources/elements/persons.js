@@ -11,15 +11,13 @@ export class PersonsCustomElement {
     constructor(eventAggregator, settingsService) {
         this._eventAggregator = eventAggregator;
         this._settingsService = settingsService;
-        this.historicPersons = [];
         this.persons = [];
     }
 
     attached() {
         const persons = this._settingsService.getSettings('persons');
         if (persons) this.persons = persons;
-        const historicPersons = this._settingsService.getSettings('historicPersons');
-        if (historicPersons?.length) this.historicPersons = historicPersons;
+        this._resetScores();
         this.gameTime = this._settingsService.getSettings('gameTime') || 30;
         this.timeLimited = this._settingsService.getSettings('timeLimited') || false;
         this._settingsService.saveSettings('gameTime', this.gameTime);
@@ -37,13 +35,6 @@ export class PersonsCustomElement {
         const isLongEnough = name?.length >= this.minLength;
         if (!isLongEnough) return;
         let newPerson = this.newPerson(name);
-        const indexOfHistoricPerson = this.historicPersons.findIndex(person => person.name == name);
-        if (indexOfHistoricPerson > -1) {
-            newPerson = this.historicPersons[indexOfHistoricPerson];
-        } else {
-            this.historicPersons.push(newPerson);
-            this._settingsService.saveSettings('historicPersons', this.historicPersons);
-        }
         if (!this.persons.find(person => person.name == name)) {
             this.persons.push(newPerson);
             this._settingsService.saveSettings('persons', this.persons);
@@ -59,10 +50,8 @@ export class PersonsCustomElement {
         this._settingsService.saveSettings('persons', this.persons);
     }
 
-    resetScore(name) {
-        const person = this.persons.find(person => person.name == name);
-        if (!person) return;
-        person.score = 0;
+    _resetScores() {
+        this.persons.forEach(person => person.score = 0);
         this._settingsService.saveSettings('persons', this.persons);
     }
 
