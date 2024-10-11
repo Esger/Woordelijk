@@ -9,6 +9,7 @@
     *:after {
         --mainColor            : green;
         --backgroundColor      : black;
+        --disabledColor        : color-mix(in srgb, var(--mainColor), 20% black);
         --smoke                : #f4f4f4;
         --backgroundColorDimmed: color-mix(in srgb, var(--backgroundColor), 40% white);
         --mainColorDimmed      : #4ccf59;
@@ -122,6 +123,10 @@ input:not(.toggle-checkbox) {
     font-size       : 2rem;
     font-weight     : bold;
     line-height     : 2rem;
+
+    &:disabled {
+        color: var(--disabledColor);
+    }
 
     &:not(:disabled) {
         cursor: pointer;

@@ -59,10 +59,12 @@
             </div>
             <input type="text"
                     value.bind="gameTime | timeWithUnit"
+                    disabled.bind="!timeLimited"
                     readonly
                     change.trigger="setTime($event)">
             <div class="steppers">
                 <button type="button"
+                        disabled.bind="!timeLimited"
                         click.delegate="incrementTime()">
                     <svg xmlns="http://www.w3.org/2000/svg"
                             width="1em"
@@ -73,6 +75,7 @@
                     </svg>
                 </button>
                 <button type="button"
+                        disabled.bind="!timeLimited"
                         click.delegate="decrementTime()">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          width="1em"
