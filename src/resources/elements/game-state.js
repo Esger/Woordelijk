@@ -48,20 +48,9 @@ export class GameState {
         this.state = 1;
     }
 
-    _getSettings() {
-        this._persons = this._settingsService.getSettings('persons');
-        if (this._persons.length < 1) return;
-        this.timeLimited = this._settingsService.getSettings('timeLimited');
-        if (this.timeLimited) {
-            this._initialGameTime = this._settingsService.getSettings('gameTime');
-            this.gameTime = this._initialGameTime;
-        }
-        this._historicPersons = this._settingsService.getSettings('historicPersons');
-    }
-
     _repeatStateNextPerson() {
         this._getSettings();
-        this.person = this._nextName();
+        this.person = this._nextPerson();
         this.state = undefined;
         setTimeout(_ => {
             this.state = 1;
@@ -72,7 +61,7 @@ export class GameState {
         if (!this.letterReady || this.showReward) return;
         this._stopTimer();
         this._getSettings();
-        this.person = this._nextName();
+        this.person = this._nextPerson();
         this.state = 2;
         setTimeout(_ => this._startTimer());
     }
@@ -89,16 +78,39 @@ export class GameState {
         setTimeout(_ => {
             setTimeout(_ => this._startTimer(), halfway);
             this._direction *= -1;
-            this.person = this._nextName();
+            this.person = this._nextPerson();
             this.state = 2;
         }, halfway);
     }
 
-    _nextName() {
+    _nextPerson() {
         this.lastPerson = this.person;
         this._personIndex += this._direction;
         this._personIndex = (this._personIndex + this._persons.length) % this._persons.length;
         return this._persons[this._personIndex];
+    }
+
+    _startTimer() {
+        if (!this.timeLimited) return;
+        this.gameTime = this._initialGameTime;
+        this._stopTimer();
+        this.interval = setInterval(_ => {
+            if (this.gameTime <= 0) {
+                this.letterReady = false;
+                switch (this.state) {
+                    case 1: this._repeatStateNextPerson(); break;
+                    case 2: this._finish(false); break;
+                }
+                this._stopTimer();
+            }
+            this.gameTime -= .02;
+        }, 20);
+    }
+
+    _stopTimer() {
+        clearInterval(this.interval);
+        this.interval = null;
+        return this.gameTime;
     }
 
     _finish(result) {
@@ -126,6 +138,17 @@ export class GameState {
         this._settingsService.saveSettings('historicPersons', this._historicPersons);
     }
 
+    _getSettings() {
+        this._persons = this._settingsService.getSettings('persons');
+        if (this._persons.length < 1) return;
+        this.timeLimited = this._settingsService.getSettings('timeLimited');
+        if (this.timeLimited) {
+            this._initialGameTime = this._settingsService.getSettings('gameTime');
+            this.gameTime = this._initialGameTime;
+        }
+        this._historicPersons = this._settingsService.getSettings('historicPersons');
+    }
+
     _showReward() {
         this.showReward = true;
         setTimeout(_ => this.showReward = false, this._rewardDuration);
@@ -134,28 +157,6 @@ export class GameState {
     _randomPerson() {
         this._personIndex = Math.floor(Math.random() * this._persons.length);
         return this._persons[this._personIndex];
-    }
-
-    _startTimer() {
-        if (!this.timeLimited) return;
-        this.gameTime = this._initialGameTime;
-        this._stopTimer();
-        this.interval = setInterval(_ => {
-            if (this.gameTime <= 0) {
-                this.letterReady = false;
-                switch (this.state) {
-                    case 1: this._repeatStateNextPerson(); break;
-                    case 2: this._finish(false); break;
-                }
-                this._stopTimer();
-            }
-            this.gameTime -= .02;
-        }, 20);
-    }
-
-    _stopTimer() {
-        clearInterval(this.interval);
-        this.interval = null;
     }
 
     detached() {
