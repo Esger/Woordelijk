@@ -118,10 +118,6 @@ dialog {
             place-content   : center;
             border-radius   : 4px;
 
-            @media screen and (max-width: 600px) {
-                display: none;
-            }
-
             svg {
                 color           : var(--backgroundColor);
                 scale           : 1.5;
