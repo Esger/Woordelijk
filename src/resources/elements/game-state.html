@@ -28,7 +28,7 @@
     <progress-bar if.bind="timeLimited && interval"
                   value.bind="gameTime"
                   letter-ready.bind="letterReady"></progress-bar>
-    <smoke name.bind="winner"
+    <smoke name.bind="winner.name"
            show-reward.bind="showReward"></smoke>
     <leader-board if.bind="state > 0"
                   state.bind="state"

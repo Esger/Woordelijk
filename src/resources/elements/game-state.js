@@ -69,8 +69,8 @@ export class GameState {
     _bounce() {
         if (!this.letterReady || this.showReward) return;
         this._stopTimer();
-        this.winner = this.person.name;
-        this.person.score++;
+        this.winner = this.person;
+        this._setScore();
         this._getSettings();
         this._saveSettings();
         this._showReward();
@@ -113,6 +113,11 @@ export class GameState {
         return this.gameTime;
     }
 
+    _setScore() {
+        if (!this.winner) return;
+        this.winner.score++;
+    }
+
     _finish(result) {
         this._stopTimer();
         this._getSettings();
@@ -120,20 +125,14 @@ export class GameState {
         setTimeout(_ => this.state = 1, halfway);
         this.letterReady = false;
         if (!result) {
-            this.winner = this.lastPerson.name;
-            this.lastPerson.score++;
+            this.winner = this.lastPerson;
+            this._setScore();
             this._saveSettings();
             this._showReward();
         }
     }
 
     _saveSettings() {
-        this._persons.forEach(person => {
-            const indexOfHistoricPerson = this._historicPersons.findIndex(historicPerson => historicPerson.name == person.name);
-            if (indexOfHistoricPerson > -1) {
-                this._historicPersons[indexOfHistoricPerson].score = person.score;
-            }
-        });
         this._settingsService.saveSettings('persons', this._persons);
         this._settingsService.saveSettings('historicPersons', this._historicPersons);
     }
