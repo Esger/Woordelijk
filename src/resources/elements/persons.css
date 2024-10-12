@@ -57,6 +57,13 @@ persons {
 }
 
 persons,
+game-state>h1 {
+    @media screen and (max-width: 600px) {
+        scale: var(--scale);
+    }
+}
+
+persons,
 dialog {
     ul {
         padding-left : 0;

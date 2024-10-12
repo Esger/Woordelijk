@@ -18,15 +18,12 @@
 
 body {
     --gradientColor : var(--mainColor);
+    --scale         : 1;
     position        : fixed;
     overflow        : hidden;
     width           : 100vw;
     height          : 100dvh;
     margin          : 0;
-    display         : flex;
-    flex-direction  : column;
-    align-items     : center;
-    justify-content : center;
     background-color: var(--backgroundColor);
     color           : var(--mainColor);
     font-size       : 32px;
@@ -64,28 +61,34 @@ h3 {
 }
 
 h1 {
-    font-size: 4rem;
-    filter   : drop-shadow(0 0 1px var(--mainColor)) drop-shadow(0 0 1px var(--mainColor));
+    font-size  : 4rem;
+    line-height: 4rem;
+    filter     : drop-shadow(0 0 1px var(--mainColor)) drop-shadow(0 0 1px var(--mainColor));
+    margin-top : auto;
 }
 
 h2 {
     font-size    : 4rem;
+    line-height  : 4rem;
     font-weight  : bold;
     margin-bottom: 1rem;
 
     @media screen and (max-width: 600px) {
-        font-size: 3rem;
+        font-size  : 3rem;
+        line-height: 3rem;
     }
 }
 
 h3 {
     font-family  : 'Bungee inline', sans-serif;
     font-size    : 4rem;
+    line-height  : 4rem;
     font-weight  : normal;
     margin-bottom: 1rem;
 
     @media screen and (max-width: 600px) {
-        font-size: 3rem;
+        font-size  : 3rem;
+        line-height: 3rem;
     }
 }
 
