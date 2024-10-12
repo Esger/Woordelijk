@@ -5,7 +5,7 @@ persons {
     position      : relative;
     z-index       : 1;
     max-width     : 30ch;
-    margin        : auto;
+    margin        : 0 auto auto;
 
     li {
         margin-bottom  : 1rem;
