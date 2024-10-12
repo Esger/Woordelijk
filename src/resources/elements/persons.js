@@ -21,6 +21,15 @@ export class PersonsCustomElement {
         this.gameTime = this._settingsService.getSettings('gameTime') || 30;
         this.timeLimited = this._settingsService.getSettings('timeLimited') || false;
         this._settingsService.saveSettings('gameTime', this.gameTime);
+        this._showLeaderBoardSubscription = this._eventAggregator.subscribe('showLeaderBoard', _ => this.sortLeaders())
+    }
+
+    detached() {
+        this._showLeaderBoardSubscription.dispose();
+    }
+
+    sortLeaders() {
+        this.persons = this.persons.sort((a, b) => b.score - a.score);
     }
 
     newPerson(name) {

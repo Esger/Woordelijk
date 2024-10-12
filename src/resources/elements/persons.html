@@ -1,7 +1,6 @@
 <template>
     <require from="./persons.css"></require>
     <require from="resources/value-converters/time-value-converter"></require>
-    <require from="resources/value-converters/order-by-value-converter"></require>
     <require from="resources/value-converters/time-with-unit-value-converter"></require>
     <require from="attributes/squishy-switch"></require>
     <require from="attributes/squishy-switch.css"></require>
@@ -29,7 +28,7 @@
     </form>
 
     <ul>
-        <li repeat.for="person of persons | orderBy: 'score' & signal: 'now'">
+        <li repeat.for="person of persons">
             <span>${person.name}</span>
             <output type="text"
                     value.bind="person.score"></output>
