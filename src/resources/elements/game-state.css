@@ -1,5 +1,13 @@
 game-state {
+    display   : block;
     margin-top: calc(1lh + 2rem);
+    --scale   : 1;
+}
+
+@media screen and (max-width: 600px) {
+    game-state {
+        scale: var(--scale);
+    }
 }
 
 game-state:has(persons)~leader-board {

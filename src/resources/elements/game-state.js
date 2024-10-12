@@ -40,6 +40,14 @@ export class GameState {
             this._startTimer();
         });
         this._lostSubscription = this._eventAggregator.subscribe('gameResult', result => this._finish(result));
+        $(window.visualViewport).on('resize', _ => requestAnimationFrame(this._scaleGame))
+    }
+
+    _scaleGame() {
+        const scale = ($(document.documentElement).width() + 32) / (600 - 32);
+        if (document.documentElement.clientWidth < 600) {
+            $('game-state')[0].style.setProperty('--scale', scale)
+        }
     }
 
     _start() {
