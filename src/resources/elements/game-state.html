@@ -7,6 +7,7 @@
     <require from="./smoke"></require>
     <require from="./game"></require>
 
+    <h1 if.bind="state == 0">${title}</h1>
     <persons if.bind="state == 0"
              class="au-animate animate-fadeIn"></persons>
     <game if.bind="state == 1"

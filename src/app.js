@@ -6,5 +6,4 @@ export class App {
     constructor(keyInputService) {
         this._keyInputService = keyInputService;
     }
-    title = 'Woordelijk!';
 }

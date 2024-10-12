@@ -3,6 +3,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { SettingsService } from 'services/settings-service';
 @inject(EventAggregator, SettingsService)
 export class GameState {
+    title = 'Woordelijk!';
 
     constructor(eventAggregator, settingsService) {
         this._eventAggregator = eventAggregator;
@@ -175,6 +176,7 @@ export class GameState {
         this._spinnerReadySubscription.dispose();
         this._playKeyPressedSubscription.dispose();
         this._escapeKeyPressedSubscription.dispose();
+        $(window.visualViewport).off('resize');
     }
 
 }
