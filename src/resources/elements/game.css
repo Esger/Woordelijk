@@ -2,10 +2,10 @@ game {
     display       : flex;
     flex-direction: column;
     align-items   : center;
-    margin-block  : auto;
+    margin-bottom : auto;
 
     h2 {
-        margin-bottom: 0;
+        margin-bottom: 2rem;
     }
 
     fieldset {

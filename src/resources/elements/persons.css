@@ -100,7 +100,7 @@ dialog {
 
             @media screen and (max-width: 600px) {
                 max-width     : 8rem;
-                padding-inline: 1rem .5rem;
+                padding-inline: 0;
                 font-size     : 2rem;
             }
 

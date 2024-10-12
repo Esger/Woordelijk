@@ -13,6 +13,12 @@ game-state:has(persons)~leader-board {
     display: none;
 }
 
+h1 {
+    @media screen and (max-width: 600px) {
+        font-size: 3rem;
+    }
+}
+
 h2 {
     margin-bottom: 2rem;
 }

@@ -6,10 +6,12 @@
     <require from="./result"></require>
     <require from="./smoke"></require>
     <require from="./game"></require>
+    <require from="resources/attributes/scale-down-to-width"></require>
 
-    <h1 if.bind="state == 0">${title}</h1>
+    <h1 scale-down-to-width>${state == 0 ? title : person.name }</h1>
     <persons if.bind="state == 0"
-             class="au-animate animate-fadeIn"></persons>
+             class="au-animate animate-fadeIn"
+             scale-down-to-width></persons>
     <game if.bind="state == 1"
           class="au-animate animate-fadeIn"
           name.bind="person.name"
