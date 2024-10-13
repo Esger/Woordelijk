@@ -70,7 +70,6 @@ leader-board {
         height          : 100dvh;
         max-width       : none;
         max-height      : none;
-        padding         : 1rem;
         background-color: var(--backgroundColor);
         color           : var(--mainColor);
         opacity         : 0;

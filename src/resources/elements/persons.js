@@ -29,7 +29,8 @@ export class PersonsCustomElement {
     }
 
     sortLeaders() {
-        this.persons = this.persons.sort((a, b) => b.score - a.score);
+        const persons = this._settingsService.getSettings('persons');
+        this.persons = persons.sort((a, b) => b.score - a.score);
     }
 
     newPerson(name) {
@@ -47,6 +48,7 @@ export class PersonsCustomElement {
         if (!this.persons.find(person => person.name == name)) {
             this.persons.push(newPerson);
             this._settingsService.saveSettings('persons', this.persons);
+            this._eventAggregator.publish('settingsChanged');
         };
 
         this.name = '';
@@ -57,6 +59,7 @@ export class PersonsCustomElement {
         if (!person) return;
         this.persons.splice(this.persons.indexOf(person), 1);
         this._settingsService.saveSettings('persons', this.persons);
+        this._eventAggregator.publish('settingsChanged');
     }
 
     _resetScores() {
@@ -105,6 +108,7 @@ export class PersonsCustomElement {
         const timeLimited = event.target.checked;
         this._settingsService.saveSettings('timeLimited', timeLimited);
         this._settingsService.saveSettings('gameTime', this.gameTime);
+        this._eventAggregator.publish('settingsChanged');
     }
 
     start() {

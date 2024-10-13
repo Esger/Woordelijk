@@ -4,6 +4,7 @@ import { SettingsService } from 'services/settings-service';
 @inject(EventAggregator, SettingsService)
 export class GameState {
     title = 'Woordelijk!';
+    _maxScore = 10;
 
     constructor(eventAggregator, settingsService) {
         this._eventAggregator = eventAggregator;
@@ -13,7 +14,7 @@ export class GameState {
         this.letterReady = false;
         this.showReward = false;
         this.timeLimited = false;
-        this.winner = '';
+        this.winner = null;
         this.state = 0;
     }
 
@@ -41,6 +42,7 @@ export class GameState {
             this._startTimer();
         });
         this._lostSubscription = this._eventAggregator.subscribe('gameResult', result => this._finish(result));
+        this._settingsChangedSubscription = this._eventAggregator.subscribe('settingsChanged', _ => this._updateSettings());
     }
     _start() {
         this._getSettings();
@@ -49,7 +51,6 @@ export class GameState {
     }
 
     _repeatStateNextPerson() {
-        this._getSettings();
         this.person = this._nextPerson();
         this.state = undefined;
         setTimeout(_ => {
@@ -59,8 +60,8 @@ export class GameState {
 
     _nextState() {
         if (!this.letterReady || this.showReward) return;
-        this._stopTimer();
-        this._getSettings();
+        this.winner = this.person;
+        this._setScore();
         this.person = this._nextPerson();
         this.state = 2;
         setTimeout(_ => this._startTimer());
@@ -68,11 +69,8 @@ export class GameState {
 
     _bounce() {
         if (!this.letterReady || this.showReward) return;
-        this._stopTimer();
         this.winner = this.person;
-        this._setScore();
-        this._getSettings();
-        this._saveSettings();
+        this._setScore(this._maxScore);
         this._showReward();
         const halfway = this._rewardDuration / 2;
         setTimeout(_ => {
@@ -81,6 +79,19 @@ export class GameState {
             this.person = this._nextPerson();
             this.state = 2;
         }, halfway);
+    }
+
+    _finish(result) {
+        const halfway = !result * this._rewardDuration / 2;
+        setTimeout(_ => this.state = 1, halfway);
+        this.letterReady = false;
+        if (!result) {
+            this.winner = this.lastPerson;
+            this._setScore();
+            this._showReward();
+        } else {
+            this._stopTimer();
+        }
     }
 
     _nextPerson() {
@@ -93,48 +104,47 @@ export class GameState {
     _startTimer() {
         if (!this.timeLimited) return;
         this.gameTime = this._initialGameTime;
-        this._stopTimer();
         this.interval = setInterval(_ => {
-            if (this.gameTime <= 0) {
+            const step = .02;
+            if (this.gameTime < step) {
                 this.letterReady = false;
                 switch (this.state) {
                     case 1: this._repeatStateNextPerson(); break;
                     case 2: this._finish(false); break;
                 }
                 this._stopTimer();
-            }
-            this.gameTime -= .02;
+            } else
+                this.gameTime -= step;
         }, 20);
     }
 
     _stopTimer() {
+        if (!this.interval) return false;
+        const time = this.gameTime;
         clearInterval(this.interval);
         this.interval = null;
-        return this.gameTime;
+        return time;
     }
 
-    _setScore() {
+    _setScore(score = 0) {
         if (!this.winner) return;
-        this.winner.score++;
-    }
-
-    _finish(result) {
-        this._stopTimer();
-        this._getSettings();
-        const halfway = !result * this._rewardDuration / 2;
-        setTimeout(_ => this.state = 1, halfway);
-        this.letterReady = false;
-        if (!result) {
-            this.winner = this.lastPerson;
-            this._setScore();
-            this._saveSettings();
-            this._showReward();
+        let dScore;
+        if (this.timeLimited) {
+            const timeLeft = this._stopTimer();
+            dScore = Math.round(this._maxScore * timeLeft / this._initialGameTime) + score;
+            if (this.state === 2) {
+                dScore = this._maxScore - dScore;
+            }
+        } else {
+            dScore = Math.round(1 + score / this._maxScore);
+            if (this.state === 2) dScore = 0;
         }
+        this.winner.score += dScore;
+        this._saveSettings();
     }
 
     _saveSettings() {
         this._settingsService.saveSettings('persons', this._persons);
-        this._settingsService.saveSettings('historicPersons', this._historicPersons);
     }
 
     _getSettings() {
@@ -143,9 +153,12 @@ export class GameState {
         this.timeLimited = this._settingsService.getSettings('timeLimited');
         if (this.timeLimited) {
             this._initialGameTime = this._settingsService.getSettings('gameTime');
-            this.gameTime = this._initialGameTime;
         }
         this._historicPersons = this._settingsService.getSettings('historicPersons');
+    }
+
+    _updateSettings() {
+        this.persons = this._settingsService.getSettings('persons');
     }
 
     _showReward() {
