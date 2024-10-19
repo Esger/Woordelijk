@@ -134,6 +134,21 @@ dialog {
     }
 }
 
+button {
+    &.resetScore {
+        padding         : .4rem;
+        flex            : 0 0 2.4rem;
+        font-size       : 1.6rem;
+        background-color: var(--backgroundColor);
+
+        svg {
+            path {
+                fill: var(--mainColor)
+            }
+        }
+    }
+}
+
 .steppers button {
     border-radius: 0;
 
@@ -151,5 +166,14 @@ dialog {
 
     &:last-child svg {
         translate: 0 -.4rem;
+    }
+}
+
+dialog {
+    /* display      : grid;
+    place-content: center; */
+
+    button.resetScore {
+        padding: 0;
     }
 }
