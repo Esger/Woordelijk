@@ -69,7 +69,7 @@ export class GameState {
 
     _bounce() {
         if (!this.letterReady || this.showReward) return;
-        this._setScore(this.person, 2);
+        this._setScore(this.person, 1);
         this._showReward();
         const halfway = this._rewardDuration / 2;
         setTimeout(_ => {
@@ -84,9 +84,6 @@ export class GameState {
         const halfway = !result * this._rewardDuration / 2;
         setTimeout(_ => this.state = 1, halfway);
         this.letterReady = false;
-        this._stopTimer();
-        if (result) return;
-
         this._setScore(this.lastPerson);
         this._showReward();
     }
@@ -126,7 +123,9 @@ export class GameState {
     _setScore(scorer, extraScore = 0) {
         if (!scorer) return;
         const timeLeft = this._stopTimer();
-        let dScore = Math.ceil(timeLeft * this._maxScore / this._initialGameTime);
+        if (!timeLeft || !this._initialGameTime) return;
+        const ratio = timeLeft / this._initialGameTime; // 0-1
+        let dScore = Math.ceil(ratio * this._maxScore);
         if (this.state === 1) {
             dScore += extraScore * this._maxScore;
         } else {
@@ -142,19 +141,11 @@ export class GameState {
     }
 
     _getSettings() {
-        this._persons = this._settingsService.getSettings('persons');
-        if (this._persons.length < 1) return;
+        this._persons = this._settingsService.getSettings('persons') || [];
         this.timeLimited = this._settingsService.getSettings('timeLimited') ? 10 : 1;
-        if (this.timeLimited) {
-            this._initialGameTime = this._settingsService.getSettings('gameTime');
-        }
-        this._historicPersons = this._settingsService.getSettings('historicPersons');
+        this._initialGameTime = this._settingsService.getSettings('gameTime') || 30;
+        this._historicPersons = this._settingsService.getSettings('historicPersons') || [];
     }
-
-    // _updateSettings() {
-    //     this.persons = this._settingsService.getSettings('persons');
-    //     this._maxScore = this._settingsService.getSettings('timeLimited', timeLimited) ? 10 : 1;
-    // }
 
     _showReward() {
         this.showReward = true;
