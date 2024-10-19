@@ -14,7 +14,6 @@ export class GameState {
         this._direction = 1;
         this.letterReady = false;
         this.showReward = false;
-        this.timeLimited = false;
         this.scorer = null;
         this.state = 0;
     }
@@ -142,7 +141,7 @@ export class GameState {
 
     _getSettings() {
         this._persons = this._settingsService.getSettings('persons') || [];
-        this.timeLimited = this._settingsService.getSettings('timeLimited') ? 10 : 1;
+        this.timeLimited = this._settingsService.getSettings('timeLimited') || false;
         this._initialGameTime = this._settingsService.getSettings('gameTime') || 30;
         this._historicPersons = this._settingsService.getSettings('historicPersons') || [];
     }

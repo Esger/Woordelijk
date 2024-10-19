@@ -21,6 +21,7 @@ export class PersonsCustomElement {
         this.gameTime = this._settingsService.getSettings('gameTime') || 30;
         this.timeLimited = this._settingsService.getSettings('timeLimited') || false;
         this._settingsService.saveSettings('gameTime', this.gameTime);
+        this._settingsService.saveSettings('timeLimited', this.timeLimited);
         this._showLeaderBoardSubscription = this._eventAggregator.subscribe('showLeaderBoard', _ => this.sortLeaders())
     }
 
