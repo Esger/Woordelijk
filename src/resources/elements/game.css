@@ -1,0 +1,19 @@
+game {
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    margin-bottom : auto;
+
+    h2 {
+        margin-bottom: 2rem;
+    }
+
+    fieldset {
+        display: flex;
+    }
+
+    button {
+        display: flex;
+        gap    : 1rem;
+    }
+}

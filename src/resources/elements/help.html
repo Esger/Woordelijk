@@ -1,0 +1,104 @@
+<template>
+    <require from="./help.css"></require>
+
+    <dialog>
+        <h2>Speluitleg</h2>
+        <ul>
+            <li>Vul de Strijders in en begin het spel <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M6 6.741c0-1.544 1.674-2.505 3.008-1.728l9.015 5.26c1.323.771 1.323 2.683 0 3.455l-9.015 5.258C7.674 19.764 6 18.803 6 17.26zM17.015 12L8 6.741V17.26z" />
+                </svg></li>
+            <li>Op het volgende scherm zie je wie een 'Woordelijk' woord mag verzinnen</li>
+            <li>Een 'Woordelijk' woord is samengesteld uit twee woorden waarvan het laatste deel van het eerste woord het eerste deel van het tweede overlapt en waarbij beide samenstellende woorden langer dan het overlappende deel moeten zijn, bijvoorbeeld:<br>
+                <p>
+                    <l>l</l>
+                    <l>o</l>
+                    <l>p</l>
+                    <l>e</l>
+                    <l>n</l>
+                    <l>e</l>
+                    <l>n</l><br>
+                    <l>l</l>
+                    <l>o</l>
+                    <l>p</l>
+                    <l>e</l>
+                    <l>n</l>
+                    <l> </l>
+                    <l> </l><br>
+                    <l> </l>
+                    <l>o</l>
+                    <l>p</l>
+                    <l>e</l>
+                    <l>n</l>
+                    <l>e</l>
+                    <l>n</l>
+                </p>
+            </li>
+            <li>Na een druk op <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M20.924 5.617a1 1 0 0 0-.217-.324l-3-3a1 1 0 1 0-1.414 1.414L17.586 5H8a5 5 0 0 0-5 5v2a1 1 0 1 0 2 0v-2a3 3 0 0 1 3-3h9.586l-1.293 1.293a1 1 0 0 0 1.414 1.414l3-3A1 1 0 0 0 21 6m-.076-.383a1 1 0 0 1 .076.38zm-17.848 12a1 1 0 0 0 .217 1.09l3 3a1 1 0 0 0 1.414-1.414L6.414 19H16a5 5 0 0 0 5-5v-2a1 1 0 1 0-2 0v2a3 3 0 0 1-3 3H6.414l1.293-1.293a1 1 0 1 0-1.414-1.414l-3 3m-.217.324a1 1 0 0 1 .215-.322z" />
+                </svg> krijg je een willekeurige letter waarmee je woord moet beginnen</li>
+            <li>Heb je een woord bedacht, druk dan op <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M5 7.766c0-1.554 1.696-2.515 3.029-1.715l7.056 4.234c1.295.777 1.295 2.653 0 3.43L8.03 17.949c-1.333.8-3.029-.16-3.029-1.715zM14.056 12L7 7.766v8.468zM18 6a1 1 0 0 1 1 1v10a1 1 0 1 1-2 0V7a1 1 0 0 1 1-1"></path>
+                </svg></li>
+            <li>Eindigt je woord ook met de beginletter, druk dan op Bounce <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M14.293 2.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414-1.414L16.586 8H5a1 1 0 0 1 0-2h11.586l-2.293-2.293a1 1 0 0 1 0-1.414m-4.586 10a1 1 0 0 1 0 1.414L7.414 16H19a1 1 0 1 1 0 2H7.414l2.293 2.293a1 1 0 0 1-1.414 1.414l-4-4a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 0"></path>
+                </svg> voor extra score</li>
+            <li>Nu zie je wie de samenstellende woorden mag raden</li>
+            <li>Geef met <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M5.293 5.293a1 1 0 0 1 1.414 0L12 10.586l5.293-5.293a1 1 0 1 1 1.414 1.414L13.414 12l5.293 5.293a1 1 0 0 1-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L10.586 12L5.293 6.707a1 1 0 0 1 0-1.414"></path>
+                </svg> of <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M20.664 5.253a1 1 0 0 1 .083 1.411l-10.666 12a1 1 0 0 1-1.495 0l-5.333-6a1 1 0 0 1 1.494-1.328l4.586 5.159l9.92-11.16a1 1 0 0 1 1.411-.082"></path>
+                </svg> aan of het goed geraden is</li>
+            <li>Is het niet goed, dan scoort de bedenker van het woord</li>
+            <li>Space of Enter om door te gaan of Goed, Esc voor Fout of Bounce</li>
+        </ul>
+        <form method="dialog">
+            <button class="close">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M5.293 5.293a1 1 0 0 1 1.414 0L12 10.586l5.293-5.293a1 1 0 1 1 1.414 1.414L13.414 12l5.293 5.293a1 1 0 0 1-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L10.586 12L5.293 6.707a1 1 0 0 1 0-1.414" />
+                </svg>
+            </button>
+        </form>
+    </dialog>
+
+    <button class="open"
+        click.delegate="showHelp()">
+        <svg xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                viewBox="0 0 24 24">
+            <g fill="currentColor">
+                <path d="M12 4a8 8 0 1 0 0 16a8 8 0 0 0 0-16M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12" />
+                <path d="M12 14a1 1 0 0 1-1-1v-1a1 1 0 1 1 2 0v1a1 1 0 0 1-1 1m-1.5 2.5a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0" />
+                <path d="M12.39 7.811c-.957-.045-1.76.49-1.904 1.353a1 1 0 0 1-1.972-.328c.356-2.136 2.303-3.102 3.971-3.022c.854.04 1.733.347 2.409.979C15.587 7.44 16 8.368 16 9.5c0 1.291-.508 2.249-1.383 2.832c-.803.535-1.788.668-2.617.668a1 1 0 1 1 0-2c.67 0 1.186-.117 1.508-.332c.25-.167.492-.46.492-1.168c0-.618-.212-1.003-.472-1.246c-.277-.259-.68-.42-1.138-.443" />
+            </g>
+        </svg>
+    </button>
+</template>

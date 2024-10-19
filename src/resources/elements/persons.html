@@ -1,0 +1,118 @@
+<template>
+    <require from="./persons.css"></require>
+    <require from="resources/value-converters/time-value-converter"></require>
+    <require from="resources/value-converters/time-with-unit-value-converter"></require>
+    <require from="attributes/squishy-switch"></require>
+    <require from="attributes/squishy-switch.css"></require>
+
+    <h2>${title}</h2>
+
+    <form class="addName"
+          submit.delegate="addName(name)">
+        <input type="text"
+            value.bind="name"
+            minlength.bind="minLength"
+            maxlength="20"
+            id="name"
+            placeholder="Naam"
+            required>
+        <button type="submit"
+            click.delegate="addName(name)">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                viewBox="0 0 24 24">
+            <path fill="currentColor"
+                d="M10 4a4 4 0 1 0 0 8a4 4 0 0 0 0-8M4 8a6 6 0 1 1 12 0A6 6 0 0 1 4 8m15 3a1 1 0 0 1 1 1v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 1 1 0-2h1v-1a1 1 0 0 1 1-1M6.5 18C5.24 18 4 19.213 4 21a1 1 0 1 1-2 0c0-2.632 1.893-5 4.5-5h7c2.607 0 4.5 2.368 4.5 5a1 1 0 1 1-2 0c0-1.787-1.24-3-2.5-3z" />
+            </svg>
+        </button>
+    </form>
+
+    <ul>
+        <li repeat.for="person of persons">
+            <span>${person.name}</span>
+            <output type="text"
+                    value.bind="person.score"></output>
+            <button click.delegate="resetScore(person.name)"
+                class="resetScore">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                            d="M12 4a8 8 0 1 0 0 16a8 8 0 0 0 0-16M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12m5.793-4.207a1 1 0 0 1 1.414 0L12 10.586l2.793-2.793a1 1 0 1 1 1.414 1.414L13.414 12l2.793 2.793a1 1 0 0 1-1.414 1.414L12 13.414l-2.793 2.793a1 1 0 0 1-1.414-1.414L10.586 12L7.793 9.207a1 1 0 0 1 0-1.414" />
+                </svg>
+            </button>
+            <button click.delegate="removeName(person.name)"
+                disabled.bind="persons.length < 3 && state > 0">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M7 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2h4a1 1 0 1 1 0 2h-1.069l-.867 12.142A2 2 0 0 1 17.069 22H6.93a2 2 0 0 1-1.995-1.858L4.07 8H3a1 1 0 0 1 0-2h4zm2 2h6V4H9zM6.074 8l.857 12H17.07l.857-12zM10 10a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1m4 0a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1" />
+                </svg>
+            </button>
+        </li>
+    </ul>
+
+    <form class="start fadeInOut ${persons.length > 1 ? 'show' : 'hide'}"
+          submit.delegate="start()">
+        <fieldset>
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M12 4a8 8 0 1 0 0 16a8 8 0 0 0 0-16M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12m10-6a1 1 0 0 1 1 1v4.586l2.707 2.707a1 1 0 0 1-1.414 1.414l-3-3A1 1 0 0 1 11 12V7a1 1 0 0 1 1-1" />
+                </svg>
+            </div>
+            <input type="text"
+                    value.bind="gameTime | timeWithUnit"
+                    disabled.bind="!timeLimited"
+                    readonly
+                    change.trigger="setTime($event)">
+            <div class="steppers">
+                <button type="button"
+                        disabled.bind="!timeLimited"
+                        click.delegate="incrementTime()">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                                d="M11.293 7.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1-1.414 1.414L12 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414z" />
+                    </svg>
+                </button>
+                <button type="button"
+                        disabled.bind="!timeLimited"
+                        click.delegate="decrementTime()">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="1em"
+                         height="1em"
+                         viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                              d="M5.293 9.293a1 1 0 0 1 1.414 0L12 14.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414" />
+                    </svg>
+                </button>
+            </div>
+            <input type="checkbox"
+                    squishy-switch
+                    checked.bind="timeLimited"
+                    change.trigger="setTimeLimit($event)">
+        </fieldset>
+        <button class="start"
+            click.delegate="start(false)"
+            title="Begin spel zonder beperkte tijd">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="1em"
+                 height="1em"
+                 viewBox="0 0 24 24">
+                <path fill="currentColor"
+                      d="M6 6.741c0-1.544 1.674-2.505 3.008-1.728l9.015 5.26c1.323.771 1.323 2.683 0 3.455l-9.015 5.258C7.674 19.764 6 18.803 6 17.26zM17.015 12L8 6.741V17.26z" />
+            </svg>
+        </button>
+    </form>
+
+</template>

@@ -1,0 +1,8 @@
+<template>
+    <require from="./progress-bar.css"></require>
+    <require from="resources/value-converters/time-value-converter"></require>
+    <require from="resources/value-converters/time-with-unit-value-converter"></require>
+
+    <p>${value | timeWithUnit}</p>
+    <span if.bind="letterReady && value < 11 && value > 0" portal.bind="targetElement">${value | time}</span>
+</template>

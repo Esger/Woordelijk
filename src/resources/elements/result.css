@@ -1,0 +1,25 @@
+result {
+    margin-block: 14rem auto;
+
+    h1 {
+        margin-bottom: 14rem;
+    }
+
+    form {
+        gap            : 4rem;
+        justify-content: center;
+        margin-bottom  : 0;
+    }
+
+    button {
+        width          : 5rem;
+        aspect-ratio   : 1;
+        display        : flex;
+        align-items    : center;
+        justify-content: center;
+
+        svg {
+            scale: 1.5;
+        }
+    }
+}

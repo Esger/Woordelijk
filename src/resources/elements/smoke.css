@@ -1,0 +1,38 @@
+smoke {
+    position      : fixed;
+    left          : 0;
+    top           : 0;
+    height        : 100vmax;
+    width         : 100vw;
+    display       : block;
+    height        : 100dvh;
+    pointer-events: none;
+
+    h1 {
+        position : absolute;
+        top      : 35vh;
+        left     : 50%;
+        transform: translateX(-50%);
+        font-size: 9rem;
+        color    : var(--smoke);
+        z-index  : 1;
+    }
+
+    @media screen and (max-width: 600px) {
+        h1 {
+            font-size: 6rem;
+        }
+    }
+
+    .smoke {
+        position           : absolute;
+        width              : 100vw;
+        height             : 100dvh;
+        background-image   : url('assets/smoke-puff.gif');
+        background-repeat  : no-repeat;
+        background-size    : cover;
+        background-position: center;
+        pointer-events     : none;
+        touch-action       : none;
+    }
+}
