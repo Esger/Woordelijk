@@ -9,7 +9,6 @@ export class GameState {
         this._eventAggregator = eventAggregator;
         this._settingsService = settingsService;
         this._getSettings();
-        this._maxScore = this.timeLimited ? 10 : 1;
         this._rewardDuration = 800;
         this._direction = 1;
         this.letterReady = false;
@@ -68,7 +67,8 @@ export class GameState {
 
     _bounce() {
         if (!this.letterReady || this.showReward) return;
-        this._setScore(this.person, 1);
+        this.winner = this.person;
+        this._setScore(this.person, true);
         this._showReward();
         const halfway = this._rewardDuration / 2;
         setTimeout(_ => {
@@ -80,11 +80,15 @@ export class GameState {
     }
 
     _finish(result) {
+        this._result = result;
         const halfway = !result * this._rewardDuration / 2;
         setTimeout(_ => this.state = 1, halfway);
         this.letterReady = false;
+        this.winner = this.lastPerson;
         this._setScore(this.lastPerson);
-        this._showReward();
+        if (!result) {
+            this._showReward();
+        }
     }
 
     _nextPerson() {
@@ -112,26 +116,29 @@ export class GameState {
     }
 
     _stopTimer() {
-        if (!this.interval) return 0;
+        if (!this.interval) return 1;
         const time = this.gameTime;
         clearInterval(this.interval);
         this.interval = null;
         return time;
     }
 
-    _setScore(scorer, extraScore = 0) {
+    _setScore(scorer, bounce = false) {
         if (!scorer) return;
+        let score = 0;
         const timeLeft = this._stopTimer();
-        if (!timeLeft || !this._initialGameTime) return;
+        const bounceScore = bounce ? this.timeLimited ? this._maxScore : 2 : 0;
         const ratio = timeLeft / this._initialGameTime; // 0-1
-        let dScore = Math.ceil(ratio * this._maxScore);
-        if (this.state === 1) {
-            dScore += extraScore * this._maxScore;
-        } else {
-            dScore = this._maxScore - dScore;
+        let timeScore = this.timeLimited ? Math.ceil(ratio * this._maxScore) : 1;
+        if (this.state === 2 && this.timeLimited) {
+            if (!this._result)
+                score += this._maxScore;
+            timeScore = this._maxScore - timeScore;
         }
-        scorer.score = scorer.score ? scorer.score + dScore : dScore;
-        console.log(`Score: ${dScore} for ${scorer.name}`);
+        score += timeScore + bounceScore;
+
+        scorer.score = scorer.score !== undefined ? scorer.score + score : score;
+        console.log(`Score: ${score} for ${scorer.name}`);
         this._saveSettings();
     }
 
@@ -142,6 +149,7 @@ export class GameState {
     _getSettings() {
         this._persons = this._settingsService.getSettings('persons') || [];
         this.timeLimited = this._settingsService.getSettings('timeLimited') || false;
+        this._maxScore = this.timeLimited ? 10 : 1;
         this._initialGameTime = this._settingsService.getSettings('gameTime') || 30;
         this._historicPersons = this._settingsService.getSettings('historicPersons') || [];
     }
