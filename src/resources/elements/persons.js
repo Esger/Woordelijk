@@ -11,18 +11,27 @@ export class PersonsCustomElement {
     constructor(eventAggregator, settingsService) {
         this._eventAggregator = eventAggregator;
         this._settingsService = settingsService;
-        this.historicPersons = [];
         this.persons = [];
     }
 
     attached() {
         const persons = this._settingsService.getSettings('persons');
         if (persons) this.persons = persons;
-        const historicPersons = this._settingsService.getSettings('historicPersons');
-        if (historicPersons?.length) this.historicPersons = historicPersons;
+        this._resetScores();
         this.gameTime = this._settingsService.getSettings('gameTime') || 30;
         this.timeLimited = this._settingsService.getSettings('timeLimited') || false;
         this._settingsService.saveSettings('gameTime', this.gameTime);
+        this._settingsService.saveSettings('timeLimited', this.timeLimited);
+        this._showLeaderBoardSubscription = this._eventAggregator.subscribe('showLeaderBoard', _ => this.sortLeaders())
+    }
+
+    detached() {
+        this._showLeaderBoardSubscription.dispose();
+    }
+
+    sortLeaders() {
+        const persons = this._settingsService.getSettings('persons');
+        this.persons = persons.sort((a, b) => b.score - a.score);
     }
 
     newPerson(name) {
@@ -37,16 +46,10 @@ export class PersonsCustomElement {
         const isLongEnough = name?.length >= this.minLength;
         if (!isLongEnough) return;
         let newPerson = this.newPerson(name);
-        const indexOfHistoricPerson = this.historicPersons.findIndex(person => person.name == name);
-        if (indexOfHistoricPerson > -1) {
-            newPerson = this.historicPersons[indexOfHistoricPerson];
-        } else {
-            this.historicPersons.push(newPerson);
-            this._settingsService.saveSettings('historicPersons', this.historicPersons);
-        }
         if (!this.persons.find(person => person.name == name)) {
             this.persons.push(newPerson);
             this._settingsService.saveSettings('persons', this.persons);
+            this._eventAggregator.publish('settingsChanged');
         };
 
         this.name = '';
@@ -56,6 +59,12 @@ export class PersonsCustomElement {
         const person = this.persons.find(person => person.name == name);
         if (!person) return;
         this.persons.splice(this.persons.indexOf(person), 1);
+        this._settingsService.saveSettings('persons', this.persons);
+        this._eventAggregator.publish('settingsChanged');
+    }
+
+    _resetScores() {
+        this.persons.forEach(person => person.score = 0);
         this._settingsService.saveSettings('persons', this.persons);
     }
 
@@ -107,6 +116,7 @@ export class PersonsCustomElement {
         const timeLimited = event.target.checked;
         this._settingsService.saveSettings('timeLimited', timeLimited);
         this._settingsService.saveSettings('gameTime', this.gameTime);
+        this._eventAggregator.publish('settingsChanged');
     }
 
     start() {

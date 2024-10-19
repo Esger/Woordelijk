@@ -1,7 +1,14 @@
 result {
+    margin-block: 14rem auto;
+
+    h1 {
+        margin-bottom: 14rem;
+    }
+
     form {
         gap            : 4rem;
         justify-content: center;
+        margin-bottom  : 0;
     }
 
     button {

@@ -3,16 +3,17 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { SettingsService } from 'services/settings-service';
 @inject(EventAggregator, SettingsService)
 export class GameState {
+    title = 'Woordelijk!';
 
     constructor(eventAggregator, settingsService) {
         this._eventAggregator = eventAggregator;
         this._settingsService = settingsService;
+        this._getSettings();
         this._rewardDuration = 800;
         this._direction = 1;
         this.letterReady = false;
         this.showReward = false;
-        this.timeLimited = false;
-        this.winner = '';
+        this.scorer = null;
         this.state = 0;
     }
 
@@ -40,28 +41,16 @@ export class GameState {
             this._startTimer();
         });
         this._lostSubscription = this._eventAggregator.subscribe('gameResult', result => this._finish(result));
+        this._settingsChangedSubscription = this._eventAggregator.subscribe('settingsChanged', _ => this._getSettings());
     }
-
     _start() {
         this._getSettings();
         this.person = this._randomPerson();
         this.state = 1;
     }
 
-    _getSettings() {
-        this._persons = this._settingsService.getSettings('persons');
-        if (this._persons.length < 1) return;
-        this.timeLimited = this._settingsService.getSettings('timeLimited');
-        if (this.timeLimited) {
-            this._initialGameTime = this._settingsService.getSettings('gameTime');
-            this.gameTime = this._initialGameTime;
-        }
-        this._historicPersons = this._settingsService.getSettings('historicPersons');
-    }
-
     _repeatStateNextPerson() {
-        this._getSettings();
-        this.person = this._nextName();
+        this.person = this._nextPerson();
         this.state = undefined;
         setTimeout(_ => {
             this.state = 1;
@@ -70,60 +59,99 @@ export class GameState {
 
     _nextState() {
         if (!this.letterReady || this.showReward) return;
-        this._stopTimer();
-        this._getSettings();
-        this.person = this._nextName();
+        this._setScore(this.person);
+        this.person = this._nextPerson();
         this.state = 2;
         setTimeout(_ => this._startTimer());
     }
 
     _bounce() {
         if (!this.letterReady || this.showReward) return;
-        this._stopTimer();
-        this.winner = this.person.name;
-        this.person.score++;
-        this._getSettings();
-        this._saveSettings();
+        this.winner = this.person;
+        this._setScore(this.person, true);
         this._showReward();
         const halfway = this._rewardDuration / 2;
         setTimeout(_ => {
             setTimeout(_ => this._startTimer(), halfway);
             this._direction *= -1;
-            this.person = this._nextName();
+            this.person = this._nextPerson();
             this.state = 2;
         }, halfway);
     }
 
-    _nextName() {
+    _finish(result) {
+        this._result = result;
+        const halfway = !result * this._rewardDuration / 2;
+        setTimeout(_ => this.state = 1, halfway);
+        this.letterReady = false;
+        this.winner = this.lastPerson;
+        this._setScore(this.lastPerson);
+        if (!result) {
+            this._showReward();
+        }
+    }
+
+    _nextPerson() {
         this.lastPerson = this.person;
         this._personIndex += this._direction;
         this._personIndex = (this._personIndex + this._persons.length) % this._persons.length;
         return this._persons[this._personIndex];
     }
 
-    _finish(result) {
-        this._stopTimer();
-        this._getSettings();
-        const halfway = !result * this._rewardDuration / 2;
-        setTimeout(_ => this.state = 1, halfway);
-        this.letterReady = false;
-        if (!result) {
-            this.winner = this.lastPerson.name;
-            this.lastPerson.score++;
-            this._saveSettings();
-            this._showReward();
+    _startTimer() {
+        if (!this.timeLimited) return;
+        this.gameTime = this._initialGameTime;
+        this.interval = setInterval(_ => {
+            const step = .02;
+            if (this.gameTime < step) {
+                this.letterReady = false;
+                this._stopTimer();
+                switch (this.state) {
+                    case 1: this._repeatStateNextPerson(); break;
+                    case 2: this._finish(false); break;
+                }
+            } else
+                this.gameTime -= step;
+        }, 20);
+    }
+
+    _stopTimer() {
+        if (!this.interval) return 1;
+        const time = this.gameTime;
+        clearInterval(this.interval);
+        this.interval = null;
+        return time;
+    }
+
+    _setScore(scorer, bounce = false) {
+        if (!scorer) return;
+        let score = 0;
+        const timeLeft = this._stopTimer();
+        const bounceScore = bounce ? this.timeLimited ? this._maxScore : 2 : 0;
+        const ratio = timeLeft / this._initialGameTime; // 0-1
+        let timeScore = this.timeLimited ? Math.ceil(ratio * this._maxScore) : 1;
+        if (this.state === 2 && this.timeLimited) {
+            if (!this._result)
+                score += this._maxScore;
+            timeScore = this._maxScore - timeScore;
         }
+        score += timeScore + bounceScore;
+
+        scorer.score = scorer.score !== undefined ? scorer.score + score : score;
+        console.log(`Score: ${score} for ${scorer.name}`);
+        this._saveSettings();
     }
 
     _saveSettings() {
-        this._persons.forEach(person => {
-            const indexOfHistoricPerson = this._historicPersons.findIndex(historicPerson => historicPerson.name == person.name);
-            if (indexOfHistoricPerson > -1) {
-                this._historicPersons[indexOfHistoricPerson].score = person.score;
-            }
-        });
         this._settingsService.saveSettings('persons', this._persons);
-        this._settingsService.saveSettings('historicPersons', this._historicPersons);
+    }
+
+    _getSettings() {
+        this._persons = this._settingsService.getSettings('persons') || [];
+        this.timeLimited = this._settingsService.getSettings('timeLimited') || false;
+        this._maxScore = this.timeLimited ? 10 : 1;
+        this._initialGameTime = this._settingsService.getSettings('gameTime') || 30;
+        this._historicPersons = this._settingsService.getSettings('historicPersons') || [];
     }
 
     _showReward() {
@@ -136,28 +164,6 @@ export class GameState {
         return this._persons[this._personIndex];
     }
 
-    _startTimer() {
-        if (!this.timeLimited) return;
-        this.gameTime = this._initialGameTime;
-        this._stopTimer();
-        this.interval = setInterval(_ => {
-            if (this.gameTime <= 0) {
-                this.letterReady = false;
-                switch (this.state) {
-                    case 1: this._repeatStateNextPerson(); break;
-                    case 2: this._finish(false); break;
-                }
-                this._stopTimer();
-            }
-            this.gameTime -= .02;
-        }, 20);
-    }
-
-    _stopTimer() {
-        clearInterval(this.interval);
-        this.interval = null;
-    }
-
     detached() {
         this._stopTimer();
         this._lostSubscription.dispose();
@@ -167,6 +173,7 @@ export class GameState {
         this._spinnerReadySubscription.dispose();
         this._playKeyPressedSubscription.dispose();
         this._escapeKeyPressedSubscription.dispose();
+        $(window.visualViewport).off('resize');
     }
 
 }

@@ -1,6 +1,6 @@
 export class SettingsService {
     _settingsName = 'woordelijk';
-    _version = 'v0.1'; // increase when settings object changes
+    _version = 'v0.2'; // increase when settings object changes
     _settings = {};
 
     constructor() {
@@ -13,6 +13,7 @@ export class SettingsService {
     }
 
     getSettings(setting) {
+        if (!setting) return this._settings;
         return this._settings[setting];
     }
 
@@ -23,8 +24,8 @@ export class SettingsService {
     }
 
     _loadSettings() {
-        const settings = JSON.parse(localStorage.getItem(this._settingsName));
-        if (!settings || settings.version !== this._version) {
+        let settings = JSON.parse(localStorage.getItem(this._settingsName));
+        if (!settings || settings === 'undefined' || settings.version !== this._version) {
             this._settings = this._defaultSettings();
             this.saveSettings(this._settings);
         }

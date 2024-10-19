@@ -5,7 +5,7 @@ persons {
     position      : relative;
     z-index       : 1;
     max-width     : 30ch;
-    margin        : auto;
+    margin        : 0 auto auto;
 
     li {
         margin-bottom  : 1rem;
@@ -57,11 +57,22 @@ persons {
 }
 
 persons,
+game-state>h1 {
+    @media screen and (max-width: 600px) {
+        scale: var(--scale);
+    }
+}
+
+persons,
 dialog {
     ul {
         padding-left : 0;
         width        : 100%;
         margin-bottom: 3rem;
+
+        @media screen and (max-width: 600px) {
+            margin-bottom: 1rem;
+        }
     }
 
 
@@ -89,7 +100,7 @@ dialog {
 
             @media screen and (max-width: 600px) {
                 max-width     : 8rem;
-                padding-inline: 1rem .5rem;
+                padding-inline: 0;
                 font-size     : 2rem;
             }
 
@@ -113,10 +124,6 @@ dialog {
             display         : grid;
             place-content   : center;
             border-radius   : 4px;
-
-            @media screen and (max-width: 600px) {
-                display: none;
-            }
 
             svg {
                 color           : var(--backgroundColor);
